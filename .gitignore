@@ -1,2 +1,6 @@
-.mvn
 .idea
+.mvn
+target
+api/target
+services/target
+dao/target

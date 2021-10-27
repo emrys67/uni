@@ -1,13 +1,14 @@
-package cz.mendel.uni.university;
+package cz.mendel.uni;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UniversityApplication {
+public class MendelUniApplication {
+
 
     public static void main(String[] args) {
-        SpringApplication.run(UniversityApplication.class, args);
+        SpringApplication.run(MendelUniApplication.class, args);
     }
 
 }
