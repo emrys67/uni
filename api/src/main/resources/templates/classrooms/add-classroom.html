@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts :: header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<form th:object="${classroom}" th:action="@{/classroom/add}" method="post">
+    <!--    <input type="text" th:value="${classroom.capacity}" th:field="${classroom.capacity}"> Capacity-->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+               th:value="${classroom.capacity}" th:field="${classroom.capacity}">
+        <input type="submit">
+    </div>
+</form>
+</body>
+</html>

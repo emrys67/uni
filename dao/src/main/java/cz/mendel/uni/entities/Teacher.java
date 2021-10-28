@@ -25,6 +25,8 @@ public class Teacher {
     private TimePeriod workingHours;
     private String firstname;
     private String lastname;
-    private String gender;
+//    @OneToMany
+//    @JoinColumn(name = "gender_id")
+//    private Gender gender;
     private Date dateOfBirth;
 }

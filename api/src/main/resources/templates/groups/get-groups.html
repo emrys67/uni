@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts :: header">
+    <meta charset="UTF-8">
+    <title>Groups</title>
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<a th:href="@{/groups/add}">add group</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="group : ${groups}">
+        <td th:text="${group.getId()}"></td>
+        <td th:text="${group.getName()}"></td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/groups/{groupId}(groupId=${group.getId()})}"
+               role="button">Info</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/groups/edit/{groupId}(groupId=${group.getId()})}"
+               role="button">Edit</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/groups/delete/{groupId}(groupId=${group.getId()})}"
+               role="button">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</table>
+</body>
+</html>

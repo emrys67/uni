@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts :: header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<form th:object="${vacation}" th:action="@{/vacation/add}" method="post">
+    <!--    <input type="text" th:value="${classroom.capacity}" th:field="${classroom.capacity}"> Capacity-->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" >Description</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+               th:field="${vacation.description}">
+        <div class="input-group-prepend">
+            <span class="input-group-text" >Start date</span>
+        </div>
+        <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+               th:field="${vacation.timePeriod.startDate}">
+        <div class="input-group-prepend">
+            <span class="input-group-text" >Start time</span>
+        </div>
+        <input type="time" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+               th:field="${vacation.timePeriod.startTime}">
+        <div class="input-group-prepend">
+            <span class="input-group-text" >End date</span>
+        </div>
+        <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+               th:field="${vacation.timePeriod.endDate}">
+        <div class="input-group-prepend">
+            <span class="input-group-text" >End time</span>
+        </div>
+        <input type="time" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+               th:field="${vacation.timePeriod.endTime}">
+        <input type="submit">
+    </div>
+</form>
+</body>
+</html>

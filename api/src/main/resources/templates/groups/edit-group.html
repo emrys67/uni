@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts :: header">
+    <meta charset="UTF-8">
+    <title>Edit Group</title>
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<form th:object="${group}" th:action="@{/groups/edit}" method="post">
+    <input type="text" th:value="${group.name}" th:field="${group.name}"> Enter new name
+    <br>
+    <input type="submit">
+</form>
+</body>
+</html>
