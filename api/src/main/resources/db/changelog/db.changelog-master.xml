@@ -69,6 +69,15 @@
             </column>
         </createTable>
 
+        <createTable tableName="groups">
+            <column name="id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(200)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
         <createTable tableName="students">
             <column name="id" type="serial">
                 <constraints primaryKey="true"/>
@@ -85,17 +94,11 @@
             <column name="gender_id" type="int">
                 <constraints nullable="false" foreignKeyName="gender_id_fk" references="genders(id)"/>
             </column>
+            <column name="group_id" type="int">
+                <constraints foreignKeyName="group_id_fk" references="groups(id)"/>
+            </column>
             <column name="study_year" type="int">
                 <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <createTable tableName="groups">
-            <column name="id" type="serial">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="name" type="varchar(200)">
-                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
 
@@ -158,17 +161,8 @@
                 <constraints nullable="false" foreignKeyName="group_id_fk" references="groups(id)"/>
             </column>
         </createTable>
-        <createTable tableName="students_groups">
-            <column name="student_id" type="int">
-                <constraints nullable="false" foreignKeyName="student_id_fk" references="students(id)"/>
-            </column>
-            <column name="group_id" type="int">
-                <constraints nullable="false" foreignKeyName="group_id_fk" references="groups(id)"/>
-            </column>
-        </createTable>
 
         <rollback>
-            <dropTable tableName="students_groups"/>
             <dropTable tableName="lectures_groups"/>
             <dropTable tableName="subjects_teachers"/>
             <dropTable tableName="lectures"/>

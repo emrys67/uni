@@ -9,18 +9,18 @@
 <body>
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-<!--        <a class="navbar-brand" href="#">Navbar</a>-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-<!--            <div class="navbar-nav">-->
-<!--                <a class="nav-link " aria-current="page" th:href="@{/home}">Home</a>-->
-<!--                <a class="nav-link" th:href="@{/groups/list}">Groups</a>-->
-<!--                <a class="nav-link" th:href="@{/people/list}">People</a>-->
+            <div class="navbar-nav">
+                <a class="nav-link " aria-current="page" th:href="@{/}">Home</a>
+                <a class="nav-link" th:href="@{/groups/list}">Groups</a>
+                <a class="nav-link" th:href="@{/students/list}">Students</a>
+                <a class="nav-link" th:href="@{/teachers/list}">Teachers</a>
 <!--                <a class="nav-link" th:href="@{/timetable/list}">Time Table</a>-->
-<!--                <a class="nav-link" th:href="@{/subjects/list}">Subjects</a>-->
-<!--            </div>-->
+                <a class="nav-link" th:href="@{/subjects/list}">Subjects</a>
+            </div>
         </div>
     </div>
 </nav>

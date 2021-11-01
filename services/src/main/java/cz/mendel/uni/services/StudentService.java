@@ -1,25 +1,52 @@
 package cz.mendel.uni.services;
 
-import cz.mendel.uni.entities.Gender;
 import cz.mendel.uni.entities.Student;
 import cz.mendel.uni.repositories.StudentRepository;
+import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+
 @AllArgsConstructor
 public class StudentService {
+    private static final Logger logger = LoggerFactory.getLogger(StudentService.class.getName());
     private StudentRepository studentRepository;
 
-    public Student findById(long id){
+    public Student findById(long id) {
+        logger.debug("Start service for getting student id {}", id);
         return studentRepository.findById(id).get();
     }
-    public Student save(Student student){
+
+    public Student save(Student student) {
+        logger.debug("Start service for saving student");
+        if (student == null) {
+            String msg = "Student can't be null";
+            logger.warn(msg);
+            throw new ServiceException(msg);
+        }
         return studentRepository.save(student);
     }
-    public List<Student> findAll(){
+
+    public List<Student> findAll() {
+        logger.debug("Start service for getting all students");
         return studentRepository.findAll();
     }
-    public void deleteById(long id){
+
+    public void deleteById(long id) {
+        logger.debug("Start service for deleting student id {}", id);
         studentRepository.deleteById(id);
+    }
+
+    public void update(Student student) {
+        logger.debug("Start service for updating student");
+        if (student == null) {
+            String msg = "Student can't be null";
+            logger.warn(msg);
+            throw new ServiceException(msg);
+        }
+        studentRepository.update(student.getFirstname(), student.getLastname(), student.getGender(),
+                student.getDateOfBirth(), student.getStudyYear(), student.getGroup(), student.getId());
     }
 }

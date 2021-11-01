@@ -4,13 +4,12 @@ import cz.mendel.uni.entities.TimePeriod;
 import cz.mendel.uni.services.TimePeriodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import static java.lang.String.format;
 
+@SessionAttributes("timeperiod")
+@RequestMapping("/timeperiod")
 public class TimeperiodController {
     @Autowired
     private TimePeriodService timePeriodService;
@@ -23,28 +22,30 @@ public class TimeperiodController {
     }
 
     @GetMapping("/add/new")
-    public String addTimeperiod(Model model){
+    public String addTimeperiod(Model model) {
         TimePeriod timePeriod = new TimePeriod();
         model.addAttribute("timeperiod", timePeriod);
         return "timeperiods/add-timeperiod";
     }
 
     @PostMapping("/add")
-    public String createTimeperiod(@ModelAttribute TimePeriod timePeriod){
+    public String createTimeperiod(@ModelAttribute TimePeriod timePeriod) {
         timePeriodService.save(timePeriod);
-        return "redirect:/timeperiod/add";
+        return "redirect:/timeperiod/add/new";
     }
 
     @GetMapping("/edit/{id}")
-    public String editTimeperiod(@PathVariable("id")long id, Model model){
+    public String editTimeperiod(@PathVariable("id") long id, Model model) {
         TimePeriod timePeriod = timePeriodService.findById(id);
         model.addAttribute("timeperiod", timePeriod);
+        System.out.println(timePeriod.getId());
         return "timeperiods/edit-timeperiod";
     }
 
     @PostMapping("/edit")
-    public String editTimeperiod(@ModelAttribute TimePeriod timePeriod){
-        timePeriodService.save(timePeriod);
-        return format("redirect:/timeperiod/edit/%s", timePeriod.getId());
+    public String editTimeperiod(@ModelAttribute TimePeriod timePeriod) {
+        System.out.println(timePeriod.getId());
+        timePeriodService.update(timePeriod);
+        return format("redirect:/timeperiod/%s", timePeriod.getId());
     }
 }

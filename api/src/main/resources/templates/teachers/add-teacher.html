@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
-<form th:object="${teacher}" th:action="@{/people/add/new/teacher}"  method="post">
+<form th:object="${teacher}" th:action="@{/teachers/add/new}"  method="post">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" >Firstname</span>
@@ -25,10 +25,10 @@
 
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <span class="input-group-text" >Gender</span>
+            <span class="input-group-text" >Gender id</span>
         </div>
-        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
-               th:field="${teacher.gender}">
+        <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+               th:field="${teacher.gender.id}">
     </div>
 
     <div class="input-group mb-3">

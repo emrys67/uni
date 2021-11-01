@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
-<form th:object="${vacation}" th:action="@{/vacation/add}" method="post">
+<form th:object="${vacation}" th:action="@{/vacation/edit}" method="post">
     <!--    <input type="text" th:value="${classroom.capacity}" th:field="${classroom.capacity}"> Capacity-->
     <div class="input-group mb-3">
         <div class="input-group-prepend">

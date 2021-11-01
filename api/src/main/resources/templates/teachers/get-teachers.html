@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layouts :: header">
     <meta charset="UTF-8">
-    <title>Students</title>
+    <title>Teachers</title>
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
@@ -16,12 +16,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="student : ${students}">
-        <td th:text="${student.getId()}"></td>
-        <td th:text="${student.getFirstname()}"></td>
-        <td th:text="${student.getLastname()}"></td>
+    <tr th:each="teacher : ${teachers}">
+        <td th:text="${teacher.getId()}"></td>
+        <td th:text="${teacher.getFirstname()}"></td>
+        <td th:text="${teacher.getLastname()}"></td>
         <td>
-            <a class="btn btn-primary" th:href="@{/people/student/{studentId}(studentId=${student.getId()})}"
+            <a class="btn btn-primary" th:href="@{/teachers/{teacherId}(teacherId=${teacher.getId()})}"
                role="button">More</a>
         </td>
     </tr>

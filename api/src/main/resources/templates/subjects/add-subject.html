@@ -23,42 +23,42 @@
     </div>
 
     <label for="teacher">Choose supervisor:</label>
-    <select id="teacher" th:field="${subject.supervisor}" class="custom-select custom-select-sm">
-        <option th:each="teacher: ${teachers}" th:value="${teacher}"
+    <select id="teacher" th:field="${subject.supervisor.id}" class="custom-select custom-select-sm">
+        <option th:each="teacher: ${teachers}" th:value="${teacher.id}"
                 th:text="${teacher.firstname + ' ' + teacher.lastname}">
         </option>
     </select>
     <br>
-    <div class="dropdown" data-control="checkbox-dropdown">
-        <label class="dropdown-label">Select teachers</label>
+<!--    <div class="dropdown" data-control="checkbox-dropdown">-->
+<!--        <label class="dropdown-label">Select teachers</label>-->
 
-        <div class="dropdown-list">
-            <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="Selection 1" />
-                Selection One
-            </label>
+<!--        <div class="dropdown-list">-->
+<!--            <label class="dropdown-option">-->
+<!--                <input type="checkbox" name="dropdown-group" value="Selection 1" />-->
+<!--                Selection One-->
+<!--            </label>-->
 
-            <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="Selection 2" />
-                Selection Two
-            </label>
+<!--            <label class="dropdown-option">-->
+<!--                <input type="checkbox" name="dropdown-group" value="Selection 2" />-->
+<!--                Selection Two-->
+<!--            </label>-->
 
-            <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="Selection 3" />
-                Selection Three
-            </label>
+<!--            <label class="dropdown-option">-->
+<!--                <input type="checkbox" name="dropdown-group" value="Selection 3" />-->
+<!--                Selection Three-->
+<!--            </label>-->
 
-            <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="Selection 4" />
-                Selection Four
-            </label>
+<!--            <label class="dropdown-option">-->
+<!--                <input type="checkbox" name="dropdown-group" value="Selection 4" />-->
+<!--                Selection Four-->
+<!--            </label>-->
 
-            <label class="dropdown-option">
-                <input type="checkbox" name="dropdown-group" value="Selection 5" />
-                Selection Five
-            </label>
-        </div>
-    </div>
+<!--            <label class="dropdown-option">-->
+<!--                <input type="checkbox" name="dropdown-group" value="Selection 5" />-->
+<!--                Selection Five-->
+<!--            </label>-->
+<!--        </div>-->
+<!--    </div>-->
     <br>
     <input type="submit">
 </form>

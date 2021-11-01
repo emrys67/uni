@@ -2,14 +2,13 @@ package cz.mendel.uni.controllers;
 
 import cz.mendel.uni.entities.Classroom;
 import cz.mendel.uni.services.ClassroomService;
+import cz.mendel.uni.services.exceptions.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import static java.lang.String.format;
 
-//@Controller
 @SessionAttributes("classroom")
 @RequestMapping("/classroom")
 public class ClassroomController {
@@ -18,39 +17,40 @@ public class ClassroomController {
 
     @GetMapping("/{id}")
     public String classroomInfo(@PathVariable("id") long id, Model model) {
-        Classroom classroom = classroomService.findById(id);
-        model.addAttribute("classroom", classroom);
-        return "classrooms/classroom-info";
+//        Classroom classroom = classroomService.findById(id);
+//        model.addAttribute("classroom", classroom);
+        throw new ServiceException();
+//        return "classrooms/classroom-info";
     }
 
     @GetMapping("/edit/{id}")
-    public String editClassroom(@PathVariable("id") long id, Model model){
+    public String editClassroom(@PathVariable("id") long id, Model model) {
         Classroom classroom = classroomService.findById(id);
         model.addAttribute("classroom", classroom);
         return "classrooms/edit-classroom";
     }
 
     @PostMapping("/edit")
-    public String edit(Classroom classroom){
+    public String edit(Classroom classroom) {
         classroomService.update(classroom);
         return format("redirect:/classroom/%s", classroom.getId());
     }
 
     @GetMapping("/add/new")
-    public String addClassroom( Model model){
+    public String addClassroom(Model model) {
         Classroom classroom = new Classroom();
         model.addAttribute("classroom", classroom);
         return "classrooms/add-classroom";
     }
 
     @PostMapping("/add")
-    public String add(Classroom classroom){
+    public String add(Classroom classroom) {
         classroomService.save(classroom);
         return "redirect:/timetable/list";
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") long id){
+    public String delete(@PathVariable("id") long id) {
         classroomService.deleteById(id);
         return "redirect:/timetable/list";
     }

@@ -15,9 +15,10 @@ import javax.persistence.*;
 @Table(name = "vacations", schema = "public")
 public class Vacation {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToOne
-    @JoinColumn(name = "timeperiod_id")
+    @JoinColumn(name = "time_period_id")
     private TimePeriod timePeriod;
     private String description;
 }

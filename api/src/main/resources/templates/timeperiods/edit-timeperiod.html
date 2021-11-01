@@ -29,6 +29,7 @@
         </div>
         <input type="time" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
                th:value="${timeperiod.endTime}" th:field="${timeperiod.endTime}">
+        <input type="hidden" th:field="*{id}"/>
         <input type="submit">
     </div>
 </form>

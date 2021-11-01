@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,6 +17,7 @@ import java.sql.Date;
 @Table(name = "teachers", schema = "public")
 public class Teacher {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToOne
     @JoinColumn(name = "vacation_id")
@@ -25,8 +27,10 @@ public class Teacher {
     private TimePeriod workingHours;
     private String firstname;
     private String lastname;
-//    @OneToMany
-//    @JoinColumn(name = "gender_id")
-//    private Gender gender;
+    @ManyToOne
+    @JoinColumn(name = "gender_id")
+    private Gender gender;
     private Date dateOfBirth;
+    @ManyToMany(mappedBy = "teachers")
+    private List<Subject> subjects;
 }

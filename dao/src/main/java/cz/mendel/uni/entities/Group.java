@@ -16,9 +16,11 @@ import java.util.List;
 @Table(name = "groups", schema = "public")
 public class Group {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @OneToMany
-    @JoinColumn(name = "group_id")
-    private List<Student> studentId;
+    @OneToMany(mappedBy = "group")
+    private List<Student> students;
+    @ManyToMany(mappedBy = "groups")
+    private List<Lecture> lectures;
 }

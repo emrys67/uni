@@ -6,9 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalTime;
 
@@ -20,6 +18,7 @@ import java.time.LocalTime;
 @Table(name = "timeperiods", schema = "public")
 public class TimePeriod {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Date startDate;
     private Date endDate;

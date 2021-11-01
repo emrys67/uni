@@ -1,27 +1,50 @@
 package cz.mendel.uni.entities;//package cz.mendel.uni.dao.entities;
-//
-//import lombok.AllArgsConstructor;
-//import lombok.Builder;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-//
-//import javax.persistence.Entity;
-//import javax.persistence.Id;
-//import javax.persistence.Table;
-//import java.util.List;
-//import java.util.Objects;
-//@Entity
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Builder
-//@Table(name = "lectures", schema = "public")
-//public class Lecture {
-//    @Id
-//    private long id;
-//    private Subject subject;
-//    private List<Group> groups;
-//    private Teacher teacher;
-//    private TimePeriod timePeriod;
-//    private Classroom classroom;
-//}
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table(name = "lectures", schema = "public")
+public class Lecture {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+    @ManyToMany
+    @JoinTable(
+            name = "lectures_groups",
+            joinColumns = {@JoinColumn(name = "lecture_id")},
+            inverseJoinColumns = {@JoinColumn(name = "group_id")}
+    )
+    private List<Group> groups;
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
+    @OneToOne
+    @JoinColumn(name = "time_period_id")
+    private TimePeriod timePeriod;
+    @ManyToOne
+    @JoinColumn(name = "classroom_id")
+    private Classroom classroom;
+
+    public void addGroup(Group group) {
+        groups.add(group);
+        group.getLectures().add(this);
+    }
+
+    public void deleteGroup(Group group) {
+        groups.remove(group);
+        group.getLectures().remove(this);
+    }
+}

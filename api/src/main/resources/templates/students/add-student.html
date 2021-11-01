@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
-<form th:object="${student}" th:action="@{/people/add/new/student}" method="post">
+<form th:object="${student}" th:action="@{/students/add/new}" method="post">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text">Firstname</span>
@@ -27,8 +27,8 @@
         <div class="input-group-prepend">
             <span class="input-group-text">Gender</span>
         </div>
-        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
-               th:field="${student.gender}">
+        <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+               th:field="${student.gender.id}">
 
     </div>
     <div class="input-group mb-3">
@@ -43,7 +43,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text">Date of Birth</span>
         </div>
-        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+        <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
                th:field="${student.dateOfBirth}">
     </div>
     <input type="submit">

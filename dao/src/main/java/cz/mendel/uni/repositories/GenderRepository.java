@@ -11,8 +11,9 @@ import java.util.List;
 public interface GenderRepository extends CrudRepository<Gender, Long> {
     @Override
     List<Gender> findAll();
+
     @Transactional
     @Modifying
-    @Query("update Classroom c set c.capacity = ?1 where c.id = ?2")
-    void update(int capacity, long id);
+    @Query("update Gender c set c.name = ?1 where c.id = ?2")
+    void update(String name, long id);
 }
