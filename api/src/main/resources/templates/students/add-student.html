@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
-<form th:object="${student}" th:action="@{/students/add/new}" method="post">
+<form th:object="${student}" th:action="@{/students/add}" method="post">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text">Firstname</span>

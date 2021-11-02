@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 @AllArgsConstructor
 public class LectureService {
     private static final Logger logger = LoggerFactory.getLogger(LectureService.class.getName());
@@ -18,7 +20,11 @@ public class LectureService {
 
     public Lecture findById(long id) {
         logger.debug("Start service for getting lecture id {}", id);
-        return lectureRepository.findById(id).get();
+        return lectureRepository.findById(id).orElseThrow(() -> {
+            String msg = format("Lecture with Id [%s] doesn't exist", id);
+            logger.warn(msg);
+            throw new ServiceException(msg);
+        });
     }
 
     public Lecture save(Lecture lecture) {

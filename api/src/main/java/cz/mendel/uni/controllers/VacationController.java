@@ -4,16 +4,15 @@ import cz.mendel.uni.entities.TimePeriod;
 import cz.mendel.uni.entities.Vacation;
 import cz.mendel.uni.services.TimePeriodService;
 import cz.mendel.uni.services.VacationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/vacation")
 @SessionAttributes("vacation")
+@AllArgsConstructor
 public class VacationController {
-    @Autowired
     private VacationService vacationService;
-    @Autowired
     private TimePeriodService timePeriodService;
 
     @GetMapping("/{id}")
@@ -32,7 +31,7 @@ public class VacationController {
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute Vacation vacation) {
+    public String add(Vacation vacation) {
         TimePeriod timePeriod = timePeriodService.save(vacation.getTimePeriod());
         vacation.setTimePeriod(timePeriod);
         vacationService.save(vacation);

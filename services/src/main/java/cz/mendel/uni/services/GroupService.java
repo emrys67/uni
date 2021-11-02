@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 @AllArgsConstructor
 public class GroupService {
     private static final Logger logger = LoggerFactory.getLogger(GroupService.class.getName());
@@ -17,7 +19,11 @@ public class GroupService {
 
     public Group findById(long id) {
         logger.debug("Start service for getting group id {}", id);
-        return groupRepository.findById(id).get();
+        return groupRepository.findById(id).orElseThrow(() -> {
+            String msg = format("Group with Id [%s] doesn't exist", id);
+            logger.warn(msg);
+            throw new ServiceException(msg);
+        });
     }
 
     public Group save(Group group) {

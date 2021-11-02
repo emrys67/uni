@@ -2,7 +2,7 @@ package cz.mendel.uni.controllers;
 
 import cz.mendel.uni.entities.TimePeriod;
 import cz.mendel.uni.services.TimePeriodService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,8 +10,8 @@ import static java.lang.String.format;
 
 @SessionAttributes("timeperiod")
 @RequestMapping("/timeperiod")
+@AllArgsConstructor
 public class TimeperiodController {
-    @Autowired
     private TimePeriodService timePeriodService;
 
     @GetMapping("/{id}")
@@ -29,7 +29,7 @@ public class TimeperiodController {
     }
 
     @PostMapping("/add")
-    public String createTimeperiod(@ModelAttribute TimePeriod timePeriod) {
+    public String createTimeperiod(TimePeriod timePeriod) {
         timePeriodService.save(timePeriod);
         return "redirect:/timeperiod/add/new";
     }
@@ -43,9 +43,15 @@ public class TimeperiodController {
     }
 
     @PostMapping("/edit")
-    public String editTimeperiod(@ModelAttribute TimePeriod timePeriod) {
+    public String editTimeperiod(TimePeriod timePeriod) {
         System.out.println(timePeriod.getId());
         timePeriodService.update(timePeriod);
         return format("redirect:/timeperiod/%s", timePeriod.getId());
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") long id) {
+        timePeriodService.deleteById(id);
+        return "redirect:/classroom//add/new";
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 @AllArgsConstructor
 public class ClassroomService {
     private static final Logger logger = LoggerFactory.getLogger(ClassroomService.class.getName());
@@ -18,7 +20,11 @@ public class ClassroomService {
 
     public Classroom findById(long id) {
         logger.debug("Start service for getting classroom id {}", id);
-        return classroomRepository.findById(id).get();
+        return classroomRepository.findById(id).orElseThrow(() -> {
+            String msg = format("Classroom with Id [%s] doesn't exist", id);
+            logger.warn(msg);
+            throw new ServiceException(msg);
+        });
     }
 
     public Classroom save(Classroom classroom) {

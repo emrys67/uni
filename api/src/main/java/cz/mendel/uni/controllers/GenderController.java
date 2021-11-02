@@ -2,7 +2,7 @@ package cz.mendel.uni.controllers;
 
 import cz.mendel.uni.entities.Gender;
 import cz.mendel.uni.services.GenderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,8 +10,8 @@ import static java.lang.String.format;
 
 @SessionAttributes("gender")
 @RequestMapping("/gender")
+@AllArgsConstructor
 public class GenderController {
-    @Autowired
     private GenderService genderService;
 
     @GetMapping("/{id}")

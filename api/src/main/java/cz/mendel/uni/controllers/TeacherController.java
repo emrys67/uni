@@ -7,7 +7,7 @@ import cz.mendel.uni.entities.Vacation;
 import cz.mendel.uni.services.TeacherService;
 import cz.mendel.uni.services.TimePeriodService;
 import cz.mendel.uni.services.VacationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +15,10 @@ import java.util.List;
 
 @SessionAttributes("teacher")
 @RequestMapping("/teachers")
+@AllArgsConstructor
 public class TeacherController {
-    @Autowired
     private TimePeriodService timePeriodService;
-    @Autowired
     private VacationService vacationService;
-    @Autowired
     private TeacherService teacherService;
 
     @GetMapping("/list")
@@ -37,7 +35,7 @@ public class TeacherController {
         return "teachers/teacher-info";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/add/new")
     public String addTeacher(Model model) {
         Teacher teacher = new Teacher();
         teacher.setGender(new Gender());
@@ -47,8 +45,8 @@ public class TeacherController {
         return "teachers/add-teacher";
     }
 
-    @PostMapping("/add/new")
-    public String addNewTeacher(@ModelAttribute Teacher teacher) {
+    @PostMapping("/add")
+    public String addNewTeacher(Teacher teacher) {
         timePeriodService.save(teacher.getWorkingHours());
         timePeriodService.save(teacher.getVacation().getTimePeriod());
         vacationService.save(teacher.getVacation());
@@ -64,7 +62,7 @@ public class TeacherController {
     }
 
     @PostMapping("/edit")
-    public String editTeacher(@ModelAttribute Teacher teacher) {
+    public String editTeacher(Teacher teacher) {
         teacherService.update(teacher);
         return "redirect:/teachers/list";
     }

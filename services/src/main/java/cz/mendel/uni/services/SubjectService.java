@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 @AllArgsConstructor
 public class SubjectService {
     private static final Logger logger = LoggerFactory.getLogger(SubjectService.class.getName());
@@ -17,7 +19,11 @@ public class SubjectService {
 
     public Subject findById(long id) {
         logger.debug("Start service for getting subject id {}", id);
-        return subjectRepository.findById(id).get();
+        return subjectRepository.findById(id).orElseThrow(() -> {
+            String msg = format("Subject with Id [%s] doesn't exist", id);
+            logger.warn(msg);
+            throw new ServiceException(msg);
+        });
     }
 
     public Subject save(Subject subject) {

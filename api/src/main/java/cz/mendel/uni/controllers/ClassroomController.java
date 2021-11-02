@@ -2,8 +2,7 @@ package cz.mendel.uni.controllers;
 
 import cz.mendel.uni.entities.Classroom;
 import cz.mendel.uni.services.ClassroomService;
-import cz.mendel.uni.services.exceptions.ServiceException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,16 +10,15 @@ import static java.lang.String.format;
 
 @SessionAttributes("classroom")
 @RequestMapping("/classroom")
+@AllArgsConstructor
 public class ClassroomController {
-    @Autowired
     private ClassroomService classroomService;
 
     @GetMapping("/{id}")
     public String classroomInfo(@PathVariable("id") long id, Model model) {
-//        Classroom classroom = classroomService.findById(id);
-//        model.addAttribute("classroom", classroom);
-        throw new ServiceException();
-//        return "classrooms/classroom-info";
+        Classroom classroom = classroomService.findById(id);
+        model.addAttribute("classroom", classroom);
+        return "classrooms/classroom-info";
     }
 
     @GetMapping("/edit/{id}")

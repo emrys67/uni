@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 @AllArgsConstructor
 public class VacationService {
     private static final Logger logger = LoggerFactory.getLogger(VacationService.class.getName());
@@ -16,7 +18,11 @@ public class VacationService {
 
     public Vacation findById(long id) {
         logger.debug("Start service for getting vacation id {}", id);
-        return vacationRepository.findById(id).get();
+        return vacationRepository.findById(id).orElseThrow(() -> {
+            String msg = format("Vacation with Id [%s] doesn't exist", id);
+            logger.warn(msg);
+            throw new ServiceException(msg);
+        });
     }
 
     public Vacation save(Vacation vacation) {

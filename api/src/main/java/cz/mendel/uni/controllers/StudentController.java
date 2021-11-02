@@ -3,6 +3,7 @@ package cz.mendel.uni.controllers;
 import cz.mendel.uni.entities.Gender;
 import cz.mendel.uni.entities.Student;
 import cz.mendel.uni.services.StudentService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +12,8 @@ import java.util.List;
 
 @SessionAttributes("student")
 @RequestMapping("/students")
+@AllArgsConstructor
 public class StudentController {
-    @Autowired
     private StudentService studentService;
 
     @GetMapping("/list")
@@ -29,7 +30,7 @@ public class StudentController {
         return "students/student-info";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/add/new")
     public String addStudent(Model model) {
         Student student = new Student();
         student.setGender(new Gender());
@@ -37,8 +38,8 @@ public class StudentController {
         return "students/add-student";
     }
 
-    @PostMapping("/add/new")
-    public String addNewStudent(@ModelAttribute Student student) {
+    @PostMapping("/add")
+    public String addNewStudent(Student student) {
         studentService.save(student);
         return "redirect:/students/students";
     }
@@ -51,7 +52,7 @@ public class StudentController {
     }
 
     @PostMapping("/edit")
-    public String editStudent(@ModelAttribute Student student) {
+    public String editStudent( Student student) {
         studentService.update(student);
         return "redirect:/students/list";
     }

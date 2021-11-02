@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 @AllArgsConstructor
 public class TimePeriodService {
     private static final Logger logger = LoggerFactory.getLogger(TimePeriodService.class.getName());
@@ -16,7 +18,11 @@ public class TimePeriodService {
 
     public TimePeriod findById(long id) {
         logger.debug("Start service for getting timeperiod id {}", id);
-        return timePeriodRepository.findById(id).get();
+        return timePeriodRepository.findById(id).orElseThrow(() -> {
+            String msg = format("TimePeriod with Id [%s] doesn't exist", id);
+            logger.warn(msg);
+            throw new ServiceException(msg);
+        });
     }
 
     public TimePeriod save(TimePeriod timePeriod) {

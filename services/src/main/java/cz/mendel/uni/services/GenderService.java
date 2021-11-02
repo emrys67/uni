@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 @AllArgsConstructor
 public class GenderService {
     private static final Logger logger = LoggerFactory.getLogger(GenderService.class.getName());
@@ -16,7 +18,11 @@ public class GenderService {
 
     public Gender findById(long id) {
         logger.debug("Start service for getting gender id {}", id);
-        return genderRepository.findById(id).get();
+        return genderRepository.findById(id).orElseThrow(() -> {
+            String msg = format("Gender with Id [%s] doesn't exist", id);
+            logger.warn(msg);
+            throw new ServiceException(msg);
+        });
     }
 
     public Gender save(Gender gender) {

@@ -4,7 +4,7 @@ import cz.mendel.uni.entities.Subject;
 import cz.mendel.uni.entities.Teacher;
 import cz.mendel.uni.services.SubjectService;
 import cz.mendel.uni.services.TeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +12,9 @@ import java.util.List;
 
 @SessionAttributes("subject")
 @RequestMapping("/subjects")
+@AllArgsConstructor
 public class SubjectController {
-    @Autowired
     private SubjectService subjectService;
-    @Autowired
     private TeacherService teacherService;
 
     @GetMapping("/list")
@@ -35,7 +34,6 @@ public class SubjectController {
     @GetMapping("/add/new")
     public String createSubject(Model model) {
         Subject subject = new Subject();
-        Teacher teacher = new Teacher();
         List<Teacher> teachers = teacherService.findAll();
         model.addAttribute("teachers", teachers);
         model.addAttribute("subject", subject);
@@ -43,7 +41,7 @@ public class SubjectController {
     }
 
     @PostMapping("/add")
-    public String addSubject(@ModelAttribute Subject subject) {
+    public String addSubject(Subject subject) {
         subjectService.save(subject);
 //        subjectService.addTeacher(subject, subject.getSupervisor());
         return "redirect:/subjects/add/new";
@@ -54,6 +52,12 @@ public class SubjectController {
         Subject subject = subjectService.findById(id);
         model.addAttribute("subject", subject);
         return "subjects/edit-subject";
+    }
+
+    @PostMapping("/edit")
+    public String edit(Subject subject) {
+        subjectService.update(subject);
+        return "redirect:/subjects/list";
     }
 
     @GetMapping("/delete/{id}")

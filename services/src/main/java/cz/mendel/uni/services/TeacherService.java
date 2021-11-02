@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 @AllArgsConstructor
 public class TeacherService {
     private static final Logger logger = LoggerFactory.getLogger(TeacherService.class.getName());
@@ -16,7 +18,11 @@ public class TeacherService {
 
     public Teacher findById(long id) {
         logger.debug("Start service for getting teacher id {}", id);
-        return teacherRepository.findById(id).get();
+        return teacherRepository.findById(id).orElseThrow(() -> {
+            String msg = format("Teacher with Id [%s] doesn't exist", id);
+            logger.warn(msg);
+            throw new ServiceException(msg);
+        });
     }
 
     public Teacher save(Teacher teacher) {

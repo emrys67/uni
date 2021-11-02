@@ -1,15 +1,18 @@
 package cz.mendel.uni.config;
 
 import cz.mendel.uni.controllers.*;
-import cz.mendel.uni.controllers.exceptions.ExceptionHandlerController;
 import cz.mendel.uni.repositories.*;
 import cz.mendel.uni.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SpringConfig {
+    @Autowired
+    private ApplicationContext context;
     @Autowired
     private ClassroomRepository classroomRepository;
     @Autowired
@@ -69,27 +72,27 @@ public class SpringConfig {
 
     @Bean
     public ClassroomController classroomController() {
-        return new ClassroomController();
+        return new ClassroomController(context.getBean(ClassroomService.class));
     }
 
     @Bean
     public TimeperiodController timeperiodController() {
-        return new TimeperiodController();
+        return new TimeperiodController(context.getBean(TimePeriodService.class));
     }
 
     @Bean
     public VacationController vacationController() {
-        return new VacationController();
+        return new VacationController(context.getBean(VacationService.class), context.getBean(TimePeriodService.class));
     }
 
     @Bean
     public GenderController genderController() {
-        return new GenderController();
+        return new GenderController(context.getBean(GenderService.class));
     }
 
     @Bean
     public GroupController groupController() {
-        return new GroupController();
+        return new GroupController(context.getBean(GroupService.class), context.getBean(StudentService.class));
     }
 
     @Bean
@@ -99,16 +102,17 @@ public class SpringConfig {
 
     @Bean
     public StudentController studentController() {
-        return new StudentController();
+        return new StudentController(context.getBean(StudentService.class));
     }
 
     @Bean
     public TeacherController teacherController() {
-        return new TeacherController();
+        return new TeacherController(context.getBean(TimePeriodService.class), context.getBean(VacationService.class),
+                context.getBean(TeacherService.class));
     }
 
     @Bean
-    public SubjectController subjectController(){
-        return new SubjectController();
+    public SubjectController subjectController() {
+        return new SubjectController(context.getBean(SubjectService.class), context.getBean(TeacherService.class));
     }
 }
