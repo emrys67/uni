@@ -4,7 +4,6 @@ import cz.mendel.uni.controllers.*;
 import cz.mendel.uni.repositories.*;
 import cz.mendel.uni.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
