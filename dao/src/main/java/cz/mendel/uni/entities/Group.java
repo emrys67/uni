@@ -19,7 +19,12 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @OneToMany(mappedBy = "group")
+    @ManyToMany
+    @JoinTable(
+            name = "groups_students",
+            joinColumns = {@JoinColumn(name = "group_id")},
+            inverseJoinColumns = {@JoinColumn(name = "student_id")}
+    )
     private List<Student> students;
     @ManyToMany(mappedBy = "groups")
     private List<Lecture> lectures;

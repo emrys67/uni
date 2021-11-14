@@ -1,6 +1,5 @@
 package cz.mendel.uni.controllers
 
-import cz.mendel.uni.controllers.GroupController
 import cz.mendel.uni.controllers.exceptions.ExceptionHandlerController
 import cz.mendel.uni.entities.Group
 import cz.mendel.uni.entities.Student
@@ -119,5 +118,23 @@ class GroupControllerTest extends Specification {
                 .andExpect(MockMvcResultMatchers.model().attribute("groupId", (long) 1))
                 .andExpect(MockMvcResultMatchers.model().attribute("student", new Student()))
                 .andExpect(MockMvcResultMatchers.view().name("groups/add-student"))
+    }
+
+    def "Status is OK and model has attribute Groups and view returned for /groups/list"() {
+        given:
+        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build();
+        groupService.findAll() >> new ArrayList<Group>()
+        expect: "status is ok"
+        mockMvc.perform(MockMvcRequestBuilders.get("/groups/list"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.model().attribute("groups", new ArrayList<Group>()))
+                .andExpect(MockMvcResultMatchers.view().name("groups/get-groups"))
+    }
+
+    def "GroupService is used in /groups/list"() {
+        when:
+        mockMvc.perform(MockMvcRequestBuilders.get("/groups/list"))
+        then:
+        1 * groupService.findAll()
     }
 }

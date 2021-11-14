@@ -1,6 +1,5 @@
 package cz.mendel.uni.controllers
 
-import cz.mendel.uni.controllers.SubjectController
 import cz.mendel.uni.controllers.exceptions.ExceptionHandlerController
 import cz.mendel.uni.entities.Subject
 import cz.mendel.uni.entities.Teacher
@@ -127,4 +126,26 @@ class SubjectControllerTest extends Specification {
         then:
         1 * teacherService.findAll()
     }
+
+    def "Status is OK and model has attributes teacher and subjectId and view returned for /subjects/add-teacher/{id}"() {
+        given:
+        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build();
+        expect: "status is ok"
+        mockMvc.perform(MockMvcRequestBuilders.get("/subjects/add-teacher/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.model().attribute("subjectId", (long)1))
+                .andExpect(MockMvcResultMatchers.model().attribute("teacher", new Teacher()))
+                .andExpect(MockMvcResultMatchers.view().name("subjects/add-teacher"))
+    }
+
+    def "SubjectService and TeacherService are used in /subjects/add/teacher/{subjectId}"() {
+        when:
+        mockMvc.perform(MockMvcRequestBuilders.post("/subjects/add/teacher/1"))
+        then:
+        1 * teacherService.findById(_)
+        1 * subjectService.findById(_)
+        1 * subjectService.addTeacher(_, _)
+        1 * subjectService.update(_)
+    }
+
 }

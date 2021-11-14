@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layouts :: header">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit teacher</title>
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
+<h1 th:align="center">Edit Teacher</h1>
 <form th:object="${teacher}" th:action="@{/teachers/edit}"  method="post">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -42,80 +43,10 @@
     <br>
     <a class="btn btn-primary" th:href="@{/vacation/edit/{vacationId}(vacationId=${teacher.getVacation().getId()})}"
        role="button">Edit Vacation</a>
-<!--    <div class="input-group mb-3">-->
-<!--        <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" >Description</span>-->
-<!--        </div>-->
-<!--        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"-->
-<!--               th:field="${teacher.vacation.description}" th:value="${teacher.vacation.description}">-->
-<!--    </div>-->
-
-<!--    <div class="input-group mb-3">-->
-<!--        <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" >Start Date</span>-->
-<!--        </div>-->
-<!--        <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"-->
-<!--               th:field="${teacher.vacation.timePeriod.startDate}" th:value="${teacher.vacation.timePeriod.startDate}">-->
-<!--    </div>-->
-
-<!--    <div class="input-group mb-3">-->
-<!--        <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" >Start Time</span>-->
-<!--        </div>-->
-<!--        <input type="time" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"-->
-<!--               th:field="${teacher.vacation.timePeriod.startTime}" th:value="${teacher.vacation.timePeriod.startTime}">-->
-<!--    </div>-->
-
-<!--    <div class="input-group mb-3">-->
-<!--        <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" >End Date</span>-->
-<!--        </div>-->
-<!--        <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"-->
-<!--               th:field="${teacher.vacation.timePeriod.endDate}" th:value="${teacher.vacation.timePeriod.endDate}">-->
-<!--    </div>-->
-
-<!--    <div class="input-group mb-3">-->
-<!--        <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" >End Time</span>-->
-<!--        </div>-->
-<!--        <input type="time" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"-->
-<!--               th:field="${teacher.vacation.timePeriod.endTime}" th:value="${teacher.vacation.timePeriod.endTime}">-->
-<!--    </div>-->
     <br>
     <br>
     <a class="btn btn-primary" th:href="@{/timeperiod/edit/{timeperiodId}(timeperiodId=${teacher.getWorkingHours().getId()})}"
        role="button">Working Hours</a>
-<!--    <div class="input-group mb-3">-->
-<!--        <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" >Start Date</span>-->
-<!--        </div>-->
-<!--        <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"-->
-<!--               th:field="${teacher.workingHours.startDate}" th:value="${teacher.workingHours.startDate}">-->
-<!--    </div>-->
-
-<!--    <div class="input-group mb-3">-->
-<!--        <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" >Start Time</span>-->
-<!--        </div>-->
-<!--        <input type="time" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"-->
-<!--               th:field="${teacher.workingHours.startTime}" th:value="${teacher.workingHours.startTime}">-->
-<!--    </div>-->
-
-<!--    <div class="input-group mb-3">-->
-<!--        <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" >End Date</span>-->
-<!--        </div>-->
-<!--        <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"-->
-<!--               th:field="${teacher.workingHours.endDate}" th:value="${teacher.workingHours.endDate}">-->
-<!--    </div>-->
-
-<!--    <div class="input-group mb-3">-->
-<!--        <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" >End Time</span>-->
-<!--        </div>-->
-<!--        <input type="time" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"-->
-<!--               th:field="${teacher.workingHours.endTime}" th:value="${teacher.workingHours.endTime}">-->
-<!--    </div>-->
     <br>
     <br>
     <input type="submit">

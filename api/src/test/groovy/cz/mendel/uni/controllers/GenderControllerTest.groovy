@@ -1,6 +1,5 @@
 package cz.mendel.uni.controllers
 
-import cz.mendel.uni.controllers.GenderController
 import cz.mendel.uni.controllers.exceptions.ExceptionHandlerController
 import cz.mendel.uni.entities.Gender
 import cz.mendel.uni.services.GenderService

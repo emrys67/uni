@@ -17,6 +17,6 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Student c set c.firstname = ?1, c.lastname = ?2, c.gender = ?3, c.dateOfBirth = ?4, c.studyYear = ?5, c.group = ?6 where c.id = ?7")
-    void update(String firstname, String lastname, Gender gender, Date dateOfBirth, int studyYear, Group group, long id);
+    @Query("update Student c set c.firstname = ?1, c.lastname = ?2, c.gender = ?3, c.dateOfBirth = ?4, c.studyYear = ?5 where c.id = ?6")
+    void update(String firstname, String lastname, Gender gender, Date dateOfBirth, int studyYear, long id);
 }

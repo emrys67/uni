@@ -162,6 +162,15 @@
             </column>
         </createTable>
 
+        <createTable tableName="groups_students">
+            <column name="group_id" type="int">
+                <constraints nullable="false" foreignKeyName="group_id_fk" references="groups(id)"/>
+            </column>
+            <column name="student_id" type="int">
+                <constraints nullable="false" foreignKeyName="student_id_fk" references="students(id)"/>
+            </column>
+        </createTable>
+
         <rollback>
             <dropTable tableName="lectures_groups"/>
             <dropTable tableName="subjects_teachers"/>

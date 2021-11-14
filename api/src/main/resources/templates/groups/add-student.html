@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layouts :: header">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add Student</title>
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
@@ -10,27 +10,5 @@
     <input type="text" th:field="${student.id}"> <br>
     <input type="submit">
 </form>
-sfdgedrg
-<!--<table class="table">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--        <th scope="col">ID</th>-->
-<!--        <th scope="col">Firstname</th>-->
-<!--        <th scope="col">Lastname</th>-->
-<!--        <th scope="col"></th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr th:each="student : ${students}">-->
-<!--        <td th:text="${student.getId()}"></td>-->
-<!--        <td th:text="${student.getFirstname()}"></td>-->
-<!--        <td th:text="${student.getLastname()}"></td>-->
-<!--        <td>-->
-<!--            <a class="btn btn-primary" th:href="@{/groups/add/{studentId}to{groupId}(studentId=${student.getId()})}"-->
-<!--               role="button">Add to group</a>-->
-<!--        </td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--</table>-->
 </body>
 </html>

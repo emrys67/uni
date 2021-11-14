@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layouts :: header">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add teacher</title>
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
+<h1 th:align="center">Create Teacher</h1>
 <form th:object="${teacher}" th:action="@{/teachers/add}"  method="post">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -38,8 +39,7 @@
         <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
                th:field="${teacher.dateOfBirth}">
     </div>
-------------------------------------------------------------------------------------------------------------------------
-        vacation
+<h2 th:align="center"><hr class="dropdown-divider">Vacation</h2>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" >Description</span>
@@ -79,8 +79,7 @@
         <input type="time" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
                th:field="${teacher.vacation.timePeriod.endTime}">
     </div>
-            ------------------------------------------------------------------------------------------------------------
-            working hours
+    <h2 th:align="center"><hr class="dropdown-divider">Working hours</h2>
 
     <div class="input-group mb-3">
         <div class="input-group-prepend">

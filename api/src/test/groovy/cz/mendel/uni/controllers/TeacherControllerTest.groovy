@@ -1,6 +1,5 @@
 package cz.mendel.uni.controllers
 
-import cz.mendel.uni.controllers.TeacherController
 import cz.mendel.uni.controllers.exceptions.ExceptionHandlerController
 import cz.mendel.uni.entities.Gender
 import cz.mendel.uni.entities.Teacher
@@ -108,5 +107,23 @@ class TeacherControllerTest extends Specification {
         mockMvc.perform(MockMvcRequestBuilders.get("/teachers/delete/1"))
         then:
         1 * teacherService.deleteById(*_);
+    }
+
+    def "Status is OK and model has attribute Teachers and view returned for /teachers/list"() {
+        given:
+        mockMvc = MockMvcBuilders.standaloneSetup(teacherController).setControllerAdvice(new ExceptionHandlerController()).build();
+        teacherService.findAll() >> new ArrayList<>()
+        expect: "status is ok"
+        mockMvc.perform(MockMvcRequestBuilders.get("/teachers/list"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.model().attribute("teachers", new ArrayList<>()))
+                .andExpect(MockMvcResultMatchers.view().name("teachers/get-teachers"))
+    }
+
+    def "TeacherService is used in /teachers/list"() {
+        when:
+        mockMvc.perform(MockMvcRequestBuilders.get("/teachers/list"))
+        then:
+        1 * teacherService.findAll()
     }
 }

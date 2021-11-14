@@ -2,15 +2,31 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layouts :: header">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit subject</title>
 </head>
 <body>
-<nav th:replace="layouts :: navbar"></nav><form th:object="${group}" th:action="@{/groups/add/new}"  method="post">
+<nav th:replace="layouts :: navbar"></nav><form th:object="${subject}" th:action="@{/subjects/edit}"  method="post">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+            <span class="input-group-text">Name</span>
         </div>
-        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  th:field="${group.name}" value="name">
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+               th:field="${subject.name}">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Description</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+               th:field="${subject.description}">
+    </div>
+
+    <label for="teacher">Choose supervisor:</label>
+    <select id="teacher" th:field="${subject.supervisor.id}" class="custom-select custom-select-sm">
+        <option th:each="teacher: ${teachers}" th:value="${teacher.id}"
+                th:text="${teacher.firstname + ' ' + teacher.lastname}">
+        </option>
+    </select>
         <input type="submit">
     </div>
 </form>

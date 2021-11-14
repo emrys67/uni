@@ -53,6 +53,6 @@ public class StudentService {
             throw new ServiceException(msg);
         }
         studentRepository.update(student.getFirstname(), student.getLastname(), student.getGender(),
-                student.getDateOfBirth(), student.getStudyYear(), student.getGroup(), student.getId());
+                student.getDateOfBirth(), student.getStudyYear(), student.getId());
     }
 }

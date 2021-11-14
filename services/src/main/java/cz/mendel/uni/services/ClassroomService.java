@@ -6,7 +6,6 @@ import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -15,7 +14,6 @@ import static java.lang.String.format;
 @AllArgsConstructor
 public class ClassroomService {
     private static final Logger logger = LoggerFactory.getLogger(ClassroomService.class.getName());
-    @Autowired
     private ClassroomRepository classroomRepository;
 
     public Classroom findById(long id) {

@@ -1,6 +1,5 @@
 package cz.mendel.uni.controllers
 
-import cz.mendel.uni.controllers.TimeperiodController
 import cz.mendel.uni.controllers.exceptions.ExceptionHandlerController
 import cz.mendel.uni.entities.TimePeriod
 import cz.mendel.uni.services.TimePeriodService

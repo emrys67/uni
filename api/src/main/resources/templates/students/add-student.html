@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layouts :: header">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add student</title>
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
@@ -35,7 +35,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text">Study Year</span>
         </div>
-        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+        <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
                th:field="${student.studyYear}">
 
     </div>

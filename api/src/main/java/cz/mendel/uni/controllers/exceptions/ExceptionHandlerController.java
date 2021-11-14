@@ -29,7 +29,7 @@ public class ExceptionHandlerController {
         logger.debug("Start preparing view");
         ModelAndView modelAndView = new ModelAndView(view);
         modelAndView.addObject("exception", exception.getClass().getSimpleName());
-        modelAndView.addObject("message", exception.getMessage());
+//        modelAndView.addObject("message", exception.getMessage());
         logger.debug("Start using view with name \"{}\"", exception.getClass().getSimpleName());
         return modelAndView;
     }

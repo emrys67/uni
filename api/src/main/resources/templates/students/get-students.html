@@ -6,12 +6,16 @@
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
+<a class="btn btn-primary" th:href="@{/students/add/new}"
+   role="button">Add student</a>
 <table class="table">
     <thead>
     <tr>
         <th scope="col">ID</th>
         <th scope="col">Firstname</th>
         <th scope="col">Lastname</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
         <th scope="col"></th>
     </tr>
     </thead>
@@ -23,6 +27,14 @@
         <td>
             <a class="btn btn-primary" th:href="@{/students/{studentId}(studentId=${student.getId()})}"
                role="button">More</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/students/edit/{studentId}(studentId=${student.getId()})}"
+               role="button">Edit</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/students/delete/{studentId}(studentId=${student.getId()})}"
+               role="button">Delete</a>
         </td>
     </tr>
     </tbody>

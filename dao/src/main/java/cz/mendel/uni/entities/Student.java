@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,7 +26,6 @@ public class Student {
     @JoinColumn(name = "gender_id")
     private Gender gender;
     private Date dateOfBirth;
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    private Group group;
+    @ManyToMany(mappedBy = "students")
+    private List<Group> group;
 }

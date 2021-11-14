@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts :: header">
+    <title>Add teacher</title>
+</head>
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+<form th:object="${teacher}" th:action="@{/subjects/add/teacher/{subjectId}(subjectId=${subjectId})}" method="post">
+    <input type="number" th:field="${teacher.id}"> <br>
+    <input type="submit">
+</form>
+</body>
+</html>

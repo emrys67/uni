@@ -6,6 +6,8 @@
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
+<a class="btn btn-primary" th:href="@{/subjects/add/new}"
+   role="button">Add subject</a>
 <table class="table">
     <thead>
     <tr>
@@ -13,6 +15,9 @@
         <th scope="col">Name</th>
         <th scope="col">Description</th>
         <th scope="col">Supervisor</th>
+        <th></th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -23,6 +28,18 @@
         <td>
             <a class="btn btn-primary"
                th:href="@{/teachers/{teacherId}(teacherId=${subject.getSupervisor().getId()})}" role="button">Supervisor</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/subjects/edit/{subjectId}(subjectId=${subject.getId()})}"
+               role="button">Edit</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/subjects/delete/{subjectId}(subjectId=${subject.getId()})}"
+               role="button">Delete</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/subjects/{subjectId}(subjectId=${subject.getId()})}"
+               role="button">Info</a>
         </td>
     </tr>
     </tbody>

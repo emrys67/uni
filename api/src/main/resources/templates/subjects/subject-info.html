@@ -13,6 +13,9 @@
         <th scope="col">Name</th>
         <th scope="col">Description</th>
         <th scope="col">Supervisor</th>
+        <th></th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +27,41 @@
             <a class="btn btn-primary"
                th:href="@{/teachers/{teacherId}(teacherId=${subject.getSupervisor().getId()})}"
                role="button">Supervisor</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/subjects/edit/{subjectId}(subjectId=${subject.getId()})}"
+               role="button">Edit</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/subjects/delete/{subjectId}(subjectId=${subject.getId()})}"
+               role="button">Delete</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/subjects/add-teacher/{subjectId}(subjectId=${subject.getId()})}"
+               role="button">Add Teacher</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<div th:align="center">Teachers</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="teacher : ${subject.teachers}">
+        <td th:text="${teacher.getId()}"></td>
+        <td th:text="${teacher.getFirstname()}"></td>
+        <td th:text="${teacher.getLastname()}"></td>
+        <td>
+            <a class="btn btn-primary" th:href="@{/teachers/{teacherId}(teacherId=${teacher.getId()})}"
+               role="button">More</a>
         </td>
     </tr>
     </tbody>
