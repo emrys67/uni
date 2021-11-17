@@ -42,14 +42,12 @@ public class TimeperiodController {
     public String editTimeperiod(@PathVariable("id") long id, Model model) {
         TimePeriod timePeriod = timePeriodService.findById(id);
         model.addAttribute("timeperiod", timePeriod);
-        System.out.println(timePeriod.getId());
         return "timeperiods/edit-timeperiod";
     }
 
     @ApiOperation(value = "Edit timeperiod")
     @PostMapping("/edit")
     public String editTimeperiod(TimePeriod timePeriod) {
-        System.out.println(timePeriod.getId());
         timePeriodService.update(timePeriod);
         return format("redirect:/timeperiod/%s", timePeriod.getId());
     }
