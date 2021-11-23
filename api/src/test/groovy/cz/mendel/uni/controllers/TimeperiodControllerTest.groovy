@@ -31,7 +31,7 @@ class TimeperiodControllerTest extends Specification {
 
     def "Status is OK and model has attribute TimePeriod and view returned for /timeperiod/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(timeperiodController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(timeperiodController).setControllerAdvice(new ExceptionHandlerController()).build()
         timePeriodService.findById(1) >> timeperiod
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/timeperiod/1"))
@@ -44,12 +44,12 @@ class TimeperiodControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/timeperiod/1"))
         then:
-        1 * timePeriodService.findById(1);
+        1 * timePeriodService.findById(1)
     }
 
     def "Status is OK and model has attribute TimePeriod and view returned for /timeperiod/add/new"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(timeperiodController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(timeperiodController).setControllerAdvice(new ExceptionHandlerController()).build()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/timeperiod/add/new"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -61,12 +61,12 @@ class TimeperiodControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/timeperiod/add"))
         then:
-        1 * timePeriodService.save(*_);
+        1 * timePeriodService.save(*_)
     }
 
     def "Status is OK and model has attribute TimePeriod and view returned for /timeperiod/edit/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(timeperiodController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(timeperiodController).setControllerAdvice(new ExceptionHandlerController()).build()
         timePeriodService.findById(1) >> timeperiod
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/timeperiod/edit/1"))
@@ -79,20 +79,20 @@ class TimeperiodControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/timeperiod/edit/1"))
         then:
-        1 * timePeriodService.findById(1);
+        1 * timePeriodService.findById(1)
     }
 
     def "TimePeriodService is used in /timeperiod/edit"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/timeperiod/edit"))
         then:
-        1 * timePeriodService.update(*_);
+        1 * timePeriodService.update(*_)
     }
 
     def "TimePeriodService is used in /timeperiod/delete/{id}"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/timeperiod/delete/1"))
         then:
-        1 * timePeriodService.deleteById(*_);
+        1 * timePeriodService.deleteById(*_)
     }
 }

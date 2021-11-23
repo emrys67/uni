@@ -4,6 +4,7 @@ import cz.mendel.uni.entities.Gender;
 import cz.mendel.uni.repositories.GenderRepository;
 import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -17,18 +18,13 @@ public class GenderService {
         log.debug("Start service for getting gender id {}", id);
         return genderRepository.findById(id).orElseThrow(() -> {
             String msg = String.format("Gender with Id [%s] doesn't exist", id);
-            log.warn(msg);
             throw new ServiceException(msg);
         });
     }
 
+    @NonNull
     public Gender save(Gender gender) {
         log.debug("Start service for saving gender");
-        if (gender == null) {
-            String msg = "Gender can't be null";
-            log.warn(msg);
-            throw new ServiceException(msg);
-        }
         return genderRepository.save(gender);
     }
 
@@ -42,14 +38,9 @@ public class GenderService {
         genderRepository.deleteById(id);
     }
 
+    @NonNull
     public void update(Gender gender) {
         log.debug("Start service for updating gender");
-        if (gender == null) {
-            String msg = "Gender can't be null";
-            log.warn(msg);
-            throw new ServiceException(msg);
-        }
         genderRepository.save(gender);
     }
-
 }

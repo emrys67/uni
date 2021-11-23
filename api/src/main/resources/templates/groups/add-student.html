@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
-<form th:object="${student}" th:action="@{/groups/add/student/{groupId}(groupId=${groupId})}"  method="post">
+<form th:object="${student}" th:action="@{/groups/add/student/{groupId}(groupId=${groupId})}" method="post">
     <input type="text" th:field="${student.id}"> <br>
     <input type="submit">
 </form>

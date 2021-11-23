@@ -5,7 +5,8 @@
     <title>Edit subject</title>
 </head>
 <body>
-<nav th:replace="layouts :: navbar"></nav><form th:object="${subject}" th:action="@{/subjects/edit}"  method="post">
+<nav th:replace="layouts :: navbar"></nav>
+<form th:object="${subject}" th:action="@{/subjects/edit}" method="post">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text">Name</span>
@@ -27,7 +28,7 @@
                 th:text="${teacher.firstname + ' ' + teacher.lastname}">
         </option>
     </select>
-        <input type="submit">
+    <input type="submit">
     </div>
 </form>
 

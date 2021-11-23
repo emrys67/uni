@@ -4,6 +4,7 @@ import cz.mendel.uni.entities.TimePeriod;
 import cz.mendel.uni.repositories.TimePeriodRepository;
 import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -17,18 +18,13 @@ public class TimePeriodService {
         log.debug("Start service for getting timeperiod id {}", id);
         return timePeriodRepository.findById(id).orElseThrow(() -> {
             String msg = String.format("TimePeriod with Id [%s] doesn't exist", id);
-            log.warn(msg);
             throw new ServiceException(msg);
         });
     }
 
+    @NonNull
     public TimePeriod save(TimePeriod timePeriod) {
         log.debug("Start service for saving timeperiod");
-        if (timePeriod == null) {
-            String msg = "TimePeriod can't be null";
-            log.warn(msg);
-            throw new ServiceException(msg);
-        }
         return timePeriodRepository.save(timePeriod);
     }
 
@@ -42,13 +38,9 @@ public class TimePeriodService {
         timePeriodRepository.deleteById(id);
     }
 
+    @NonNull
     public void update(TimePeriod timePeriod) {
         log.debug("Start service for updating timeperiod");
-        if (timePeriod == null) {
-            String msg = "TimePeriod can't be null";
-            log.warn(msg);
-            throw new ServiceException(msg);
-        }
         timePeriodRepository.save(timePeriod);
     }
 }

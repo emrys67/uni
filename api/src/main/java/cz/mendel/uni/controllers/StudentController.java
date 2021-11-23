@@ -32,9 +32,7 @@ public class StudentController {
     @ApiOperation(value = "Create new student")
     @GetMapping("/add/new")
     public String addStudent(Model model) {
-        Student student = new Student();
-        student.setGender(new Gender());
-        model.addAttribute("student", student);
+        model.addAttribute("student", Student.builder().gender(new Gender()).build());
         return "students/add-student";
     }
 
@@ -56,7 +54,7 @@ public class StudentController {
     @ApiOperation(value = "Edit student")
     @ApiIgnore
     @PostMapping("/edit")
-    public String editStudent( Student student) {
+    public String editStudent(Student student) {
         studentService.update(student);
         return "redirect:/students/list";
     }

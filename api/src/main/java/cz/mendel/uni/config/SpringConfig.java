@@ -121,9 +121,4 @@ public class SpringConfig {
     public SubjectController subjectController() {
         return new SubjectController(context.getBean(SubjectService.class), context.getBean(TeacherService.class));
     }
-
-    @Bean
-    public TimeTableController timeTableController(){
-        return new TimeTableController(context.getBean(LectureService.class));
-    }
 }

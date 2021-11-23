@@ -18,20 +18,20 @@ import spock.lang.Specification
 @EnableAutoConfiguration
 class ClassroomControllerTest extends Specification {
     @Autowired
-    private MockMvc mockMvc;
-    private Classroom classroom = new Classroom();
-    private ClassroomService classroomService;
-    private ClassroomController classroomController;
+    private MockMvc mockMvc
+    private Classroom classroom = new Classroom()
+    private ClassroomService classroomService
+    private ClassroomController classroomController
 
     def setup() {
-        classroomService = Mock();
-        classroomController = new ClassroomController(classroomService);
-        mockMvc = MockMvcBuilders.standaloneSetup(classroomController).setControllerAdvice(new ExceptionHandlerController()).build();
+        classroomService = Mock()
+        classroomController = new ClassroomController(classroomService)
+        mockMvc = MockMvcBuilders.standaloneSetup(classroomController).setControllerAdvice(new ExceptionHandlerController()).build()
     }
 
     def "Status is OK and model has attribute Classroom and view returned for /classroom/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(classroomController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(classroomController).setControllerAdvice(new ExceptionHandlerController()).build()
         classroomService.findById(1) >> classroom
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/classroom/1"))
@@ -44,12 +44,12 @@ class ClassroomControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/classroom/1"))
         then:
-        1 * classroomService.findById(1);
+        1 * classroomService.findById(1)
     }
 
     def "Status is OK and model has attribute Classroom and view returned for /classroom/add/new"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(classroomController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(classroomController).setControllerAdvice(new ExceptionHandlerController()).build()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/classroom/add/new"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -61,12 +61,12 @@ class ClassroomControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/classroom/add"))
         then:
-        1 * classroomService.save(*_);
+        1 * classroomService.save(*_)
     }
 
     def "Status is OK and model has attribute Classroom and view returned for /classroom/edit/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(classroomController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(classroomController).setControllerAdvice(new ExceptionHandlerController()).build()
         classroomService.findById(1) >> classroom
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/classroom/edit/1"))
@@ -79,20 +79,20 @@ class ClassroomControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/classroom/edit/1"))
         then:
-        1 * classroomService.findById(1);
+        1 * classroomService.findById(1)
     }
 
     def "ClassroomService is used in /classroom/edit"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/classroom/edit"))
         then:
-        1 * classroomService.update(*_);
+        1 * classroomService.update(*_)
     }
 
     def "ClassroomService is used in /classroom/delete/{id}"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/classroom/delete/1"))
         then:
-        1 * classroomService.deleteById(*_);
+        1 * classroomService.deleteById(*_)
     }
 }

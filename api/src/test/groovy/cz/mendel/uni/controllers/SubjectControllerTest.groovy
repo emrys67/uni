@@ -23,7 +23,7 @@ class SubjectControllerTest extends Specification {
     private MockMvc mockMvc
     private Subject subject = new Subject()
     private SubjectService subjectService
-    private TeacherService teacherService;
+    private TeacherService teacherService
     private SubjectController subjectController
 
     def setup() {
@@ -35,7 +35,7 @@ class SubjectControllerTest extends Specification {
 
     def "Status is OK and model has attribute Subject and view returned for /students/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build()
         subjectService.findById(1) >> subject
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/subjects/1"))
@@ -48,13 +48,13 @@ class SubjectControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/subjects/1"))
         then:
-        1 * subjectService.findById(1);
+        1 * subjectService.findById(1)
     }
 
     def "Status is OK and model has attribute Subject and view returned for /subjects/add/new"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build();
-        teacherService.findAll() >> new ArrayList<Teacher>();
+        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build()
+        teacherService.findAll() >> new ArrayList<Teacher>()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/subjects/add/new"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -67,12 +67,12 @@ class SubjectControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/subjects/add"))
         then:
-        1 * subjectService.save(*_);
+        1 * subjectService.save(*_)
     }
 
     def "Status is OK and model has attribute Subject and view returned for /subjects/edit/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build()
         subjectService.findById(1) >> subject
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/subjects/edit/1"))
@@ -83,7 +83,7 @@ class SubjectControllerTest extends Specification {
 
     def "Status is OK and model has attribute Subjects and view returned for /subjects/list"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build()
         subjectService.findAll() >> new ArrayList<Subject>()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/subjects/list"))
@@ -96,28 +96,28 @@ class SubjectControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/subjects/list"))
         then:
-        1 * subjectService.findAll();
+        1 * subjectService.findAll()
     }
 
     def "SubjectService is used in /subjects/edit/{id}"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/subjects/edit/1"))
         then:
-        1 * subjectService.findById(1);
+        1 * subjectService.findById(1)
     }
 
     def "SubjectService is used in /subjects/edit"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/subjects/edit"))
         then:
-        1 * subjectService.update(*_);
+        1 * subjectService.update(*_)
     }
 
     def "SubjectService is used in /subjects/delete/{id}"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/subjects/delete/1"))
         then:
-        1 * subjectService.deleteById(*_);
+        1 * subjectService.deleteById(*_)
     }
 
     def "TeacherService is used in /subjects/add/new"() {
@@ -129,11 +129,11 @@ class SubjectControllerTest extends Specification {
 
     def "Status is OK and model has attributes teacher and subjectId and view returned for /subjects/add-teacher/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(subjectController).setControllerAdvice(new ExceptionHandlerController()).build()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/subjects/add-teacher/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attribute("subjectId", (long)1))
+                .andExpect(MockMvcResultMatchers.model().attribute("subjectId", (long) 1))
                 .andExpect(MockMvcResultMatchers.model().attribute("teacher", new Teacher()))
                 .andExpect(MockMvcResultMatchers.view().name("subjects/add-teacher"))
     }
@@ -147,5 +147,4 @@ class SubjectControllerTest extends Specification {
         1 * subjectService.addTeacher(_, _)
         1 * subjectService.update(_)
     }
-
 }

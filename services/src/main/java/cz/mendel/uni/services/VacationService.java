@@ -4,6 +4,7 @@ import cz.mendel.uni.entities.Vacation;
 import cz.mendel.uni.repositories.VacationRepository;
 import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -17,18 +18,13 @@ public class VacationService {
         log.debug("Start service for getting vacation id {}", id);
         return vacationRepository.findById(id).orElseThrow(() -> {
             String msg = String.format("Vacation with Id [%s] doesn't exist", id);
-            log.warn(msg);
             throw new ServiceException(msg);
         });
     }
 
+    @NonNull
     public Vacation save(Vacation vacation) {
         log.debug("Start service for saving vacation");
-        if (vacation == null) {
-            String msg = "Vacation can't be null";
-            log.warn(msg);
-            throw new ServiceException(msg);
-        }
         return vacationRepository.save(vacation);
     }
 
@@ -42,13 +38,9 @@ public class VacationService {
         vacationRepository.deleteById(id);
     }
 
+    @NonNull
     public void update(Vacation vacation) {
         log.debug("Start service for updating vacation");
-        if (vacation == null) {
-            String msg = "Vacation can't be null";
-            log.warn(msg);
-            throw new ServiceException(msg);
-        }
         vacationRepository.save(vacation);
     }
 }

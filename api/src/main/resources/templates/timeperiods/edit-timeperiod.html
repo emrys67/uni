@@ -9,14 +9,16 @@
 <form th:object="${timeperiod}" th:action="@{/timeperiod/edit}" method="post">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <span class="input-group-text" >Start time</span>
+            <span class="input-group-text">Start time</span>
         </div>
-        <input type="datetime-local" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+        <input type="datetime-local" class="form-control" aria-label="Default"
+               aria-describedby="inputGroup-sizing-default"
                th:value="${timeperiod.startTime}" th:field="${timeperiod.startTime}">
         <div class="input-group-prepend">
-            <span class="input-group-text" >End time</span>
+            <span class="input-group-text">End time</span>
         </div>
-        <input type="datetime-local" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+        <input type="datetime-local" class="form-control" aria-label="Default"
+               aria-describedby="inputGroup-sizing-default"
                th:value="${timeperiod.endTime}" th:field="${timeperiod.endTime}">
         <input type="hidden" th:field="*{id}"/>
         <input type="submit">

@@ -4,6 +4,7 @@ import cz.mendel.uni.entities.Student;
 import cz.mendel.uni.repositories.StudentRepository;
 import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -17,18 +18,13 @@ public class StudentService {
         log.debug("Start service for getting student id {}", id);
         return studentRepository.findById(id).orElseThrow(() -> {
             String msg = String.format("Student with Id [%s] doesn't exist", id);
-            log.warn(msg);
             throw new ServiceException(msg);
         });
     }
 
+    @NonNull
     public Student save(Student student) {
         log.debug("Start service for saving student");
-        if (student == null) {
-            String msg = "Student can't be null";
-            log.warn(msg);
-            throw new ServiceException(msg);
-        }
         return studentRepository.save(student);
     }
 
@@ -42,13 +38,9 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
+    @NonNull
     public void update(Student student) {
         log.debug("Start service for updating student");
-        if (student == null) {
-            String msg = "Student can't be null";
-            log.warn(msg);
-            throw new ServiceException(msg);
-        }
         studentRepository.save(student);
     }
 }

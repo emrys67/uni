@@ -26,6 +26,7 @@ public class ClassroomController {
         model.addAttribute("classroom", classroomService.findById(id));
         return "classrooms/edit-classroom";
     }
+
     @ApiOperation(value = "Edit classroom")
     @PostMapping("/edit")
     public String edit(Classroom classroom) {

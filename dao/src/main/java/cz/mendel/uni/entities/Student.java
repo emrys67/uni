@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -26,7 +27,8 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "gender_id")
     private Gender gender;
-    private Date dateOfBirth;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dateOfBirth;
     @ManyToMany(mappedBy = "students")
     private List<Group> group;
 }

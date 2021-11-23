@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
-<form th:object="${teacher}" th:action="@{/teachers/edit}"  method="post">
+<form th:object="${teacher}" th:action="@{/teachers/edit}" method="post">
     <label for="teacher">Choose Teacher:</label>
     <select id="teacher" th:field="${lecture.teacher.id}" class="custom-select custom-select-sm">
         <option th:each="teacher: ${teachers}" th:value="${teacher.id}"
@@ -31,7 +31,8 @@
     </select>
     <br>
     <br>
-    <a class="btn btn-primary" th:href="@{/timeperiod/edit/{timeperiodId}(timeperiodId=${teacher.getWorkingHours().getId()})}"
+    <a class="btn btn-primary"
+       th:href="@{/timeperiod/edit/{timeperiodId}(timeperiodId=${teacher.getWorkingHours().getId()})}"
        role="button">Edit timeperiod</a>
     <br>
     <br>

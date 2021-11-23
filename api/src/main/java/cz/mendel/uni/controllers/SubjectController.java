@@ -74,8 +74,9 @@ public class SubjectController {
     @ApiIgnore
     @PostMapping("/add/teacher/{subjectId}")
     public String addTeacher(Teacher teacher, @PathVariable("subjectId") long subjectId) {
-        subjectService.addTeacher(subjectService.findById(subjectId), teacherService.findById(teacher.getId()));
-        subjectService.update(subjectService.findById(subjectId));
+        Subject subject = subjectService.findById(subjectId);
+        subjectService.addTeacher(subject, teacherService.findById(teacher.getId()));
+        subjectService.update(subject);
         return String.format("redirect:/subjects/%s", subjectId);
     }
 

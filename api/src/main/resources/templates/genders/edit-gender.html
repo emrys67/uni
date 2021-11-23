@@ -7,10 +7,9 @@
 <body>
 <nav th:replace="layouts :: navbar"></nav>
 <form th:object="${gender}" th:action="@{/gender/edit}" method="post">
-    <!--    <input type="text" th:value="${classroom.capacity}" th:field="${classroom.capacity}"> Capacity-->
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <span class="input-group-text" >Name</span>
+            <span class="input-group-text">Name</span>
         </div>
         <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
                th:field="${gender.name}" th:value="${gender.name}">

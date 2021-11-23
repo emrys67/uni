@@ -72,8 +72,9 @@ public class GroupController {
     @ApiIgnore
     @PostMapping("/add/student/{groupId}")
     public String addStudent(Student student, @PathVariable("groupId") long groupId) {
-        groupService.addStudent(studentService.findById(student.getId()), groupService.findById(groupId));
-        groupService.update(groupService.findById(groupId));
+        Group group = groupService.findById(groupId);
+        groupService.addStudent(studentService.findById(student.getId()), group);
+        groupService.update(group);
         return String.format("redirect:/groups/add-student/%s", groupId);
     }
 

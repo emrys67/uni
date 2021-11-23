@@ -10,8 +10,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -23,8 +21,8 @@ public class TimePeriod {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_timeperiod")
     private long id;
-    @DateTimeFormat(iso = DATE_TIME)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime startTime;
-    @DateTimeFormat(iso = DATE_TIME)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endTime;
 }

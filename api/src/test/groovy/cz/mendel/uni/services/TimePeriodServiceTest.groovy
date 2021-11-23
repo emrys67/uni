@@ -2,25 +2,24 @@ package cz.mendel.uni.services
 
 import cz.mendel.uni.entities.TimePeriod
 import cz.mendel.uni.repositories.TimePeriodRepository
-import cz.mendel.uni.services.exceptions.ServiceException
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
 
 @EnableAutoConfiguration
 @SpringBootTest
-class TimePeriodServiceTest extends Specification{
+class TimePeriodServiceTest extends Specification {
     private TimePeriodService timePeriodService
     private TimePeriodRepository timePeriodRepository
     private TimePeriod timePeriod
 
-    def setup(){
+    def setup() {
         timePeriodRepository = Mock()
         timePeriodService = new TimePeriodService(timePeriodRepository)
         timePeriod = new TimePeriod()
     }
 
-    def "TimePeriodRepository is used in findById(long) "(){
+    def "TimePeriodRepository is used in findById(long) "() {
         given:
         TimePeriodRepository stubRepo = Stub(TimePeriodRepository)
         TimePeriodService service = new TimePeriodService(stubRepo)
@@ -31,46 +30,31 @@ class TimePeriodServiceTest extends Specification{
         testTimePeriod == timePeriod
     }
 
-    def "TimePeriodRepository is used in save(TimePeriod) "(){
+    def "TimePeriodRepository is used in save(TimePeriod) "() {
         when:
         timePeriodService.save(timePeriod)
         then:
         1 * timePeriodRepository.save(timePeriod)
     }
 
-    def "TimePeriodRepository is used in update(TimePeriod) "(){
+    def "TimePeriodRepository is used in update(TimePeriod) "() {
         when:
         timePeriodService.update(timePeriod)
         then:
-        1 * timePeriodRepository.update(timePeriod.getStartDate(), timePeriod.getStartTime(), timePeriod.getEndTime(),
-                timePeriod.getEndDate(), timePeriod.getId())
+        1 * timePeriodRepository.save(timePeriod)
     }
 
-    def "TimePeriodRepository is used in findAll() "(){
+    def "TimePeriodRepository is used in findAll() "() {
         when:
         timePeriodService.findAll()
         then:
         1 * timePeriodRepository.findAll()
     }
 
-    def "TimePeriodRepository is used in deleteById(long) "(){
+    def "TimePeriodRepository is used in deleteById(long) "() {
         when:
         timePeriodService.deleteById(1)
         then:
         1 * timePeriodRepository.deleteById(1)
-    }
-
-    def "Save null cause @ServiceException"(){
-        when:
-        timePeriodService.save(null)
-        then:
-        thrown(ServiceException)
-    }
-
-    def "Update null cause @ServiceException"(){
-        when:
-        timePeriodService.update(null)
-        then:
-        thrown(ServiceException)
     }
 }

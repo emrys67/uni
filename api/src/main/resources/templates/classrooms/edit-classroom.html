@@ -7,7 +7,6 @@
 <body>
 <nav th:replace="layouts :: navbar"></nav>
 <form th:object="${classroom}" th:action="@{/classroom/edit}" method="post">
-<!--    <input type="text" th:value="${classroom.capacity}" th:field="${classroom.capacity}"> Capacity-->
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
