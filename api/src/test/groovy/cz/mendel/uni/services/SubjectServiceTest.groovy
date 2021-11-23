@@ -19,14 +19,16 @@ class SubjectServiceTest extends Specification {
         subjectService = new SubjectService(subjectRepository)
         subject = new Subject()
     }
-//todo fix test
+
     def "SubjectRepository is used in findById(long) "() {
         given:
-        subjectRepository.findById(0) >> subject
+        SubjectRepository stubRepo = Stub(SubjectRepository)
+        SubjectService service = new SubjectService(stubRepo)
+        stubRepo.findById(1) >> Optional.of(subject)
         when:
-        subjectService.findById(0)
+        Subject testSubject = service.findById(1)
         then:
-        1 * subjectRepository.findById(0)
+        testSubject == subject
     }
 
     def "SubjectRepository is used in save(Subject) "() {

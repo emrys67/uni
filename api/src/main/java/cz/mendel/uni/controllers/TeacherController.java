@@ -13,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.List;
-
 @SessionAttributes("teacher")
 @RequestMapping("/teachers")
 @AllArgsConstructor
@@ -26,27 +24,22 @@ public class TeacherController {
     @ApiOperation(value = "Get all teachers")
     @GetMapping("/list")
     public String teachers(Model model) {
-        List<Teacher> teachers = teacherService.findAll();
-        model.addAttribute("teachers", teachers);
+        model.addAttribute("teachers", teacherService.findAll());
         return "teachers/get-teachers";
     }
 
     @ApiOperation(value = "Get teacher by id")
     @GetMapping("/{id}")
     public String teacherInfo(@PathVariable("id") long id, Model model) {
-        Teacher teacher = teacherService.findById(id);
-        model.addAttribute("teacher", teacher);
+        model.addAttribute("teacher", teacherService.findById(id));
         return "teachers/teacher-info";
     }
 
     @ApiOperation(value = "Create new teacher")
     @GetMapping("/add/new")
     public String addTeacher(Model model) {
-        Teacher teacher = new Teacher();
-        teacher.setGender(new Gender());
-        teacher.setVacation(new Vacation());
-        teacher.setWorkingHours(new TimePeriod());
-        model.addAttribute("teacher", teacher);
+        model.addAttribute("teacher", Teacher.builder().gender(new Gender()).vacation(new Vacation())
+                .workingHours(new TimePeriod()).build());
         return "teachers/add-teacher";
     }
 
@@ -64,8 +57,7 @@ public class TeacherController {
     @ApiOperation(value = "Edit teacher by id")
     @GetMapping("/edit/{id}")
     public String editTeacher(@PathVariable("id") long id, Model model) {
-        Teacher teacher = teacherService.findById(id);
-        model.addAttribute("teacher", teacher);
+        model.addAttribute("teacher", teacherService.findById(id));
         return "teachers/edit-teacher";
     }
 

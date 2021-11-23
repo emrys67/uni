@@ -19,14 +19,16 @@ class GenderServiceTest extends Specification{
         genderService = new GenderService(genderRepository)
         gender = new Gender()
     }
-//todo fix test
+
     def "GenderRepository is used in findById(long) "(){
         given:
-        genderRepository.findById(0) >> gender
+        GenderRepository stubRepo = Stub(GenderRepository)
+        GenderService service = new GenderService(stubRepo)
+        stubRepo.findById(1) >> Optional.of(gender)
         when:
-        genderService.findById(0)
+        Gender testGender = service.findById(1)
         then:
-        1 * genderRepository.findById(0)
+        testGender == gender
     }
 
     def "GenderRepository is used in save(Gender) "(){

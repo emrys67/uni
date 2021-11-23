@@ -11,9 +11,9 @@ import java.util.List;
 public interface ClassroomRepository extends CrudRepository<Classroom, Long> {
     @Override
     List<Classroom> findAll();
-
-    @Transactional
-    @Modifying
-    @Query("update Classroom c set c.capacity = ?1 where c.id = ?2")
-    void update(int capacity, long id);
+//
+//    @Transactional
+//    @Modifying
+//    @Query("update Classroom c set c.capacity = ?1 where c.id = ?2")
+//    void update(int capacity, long id);
 }

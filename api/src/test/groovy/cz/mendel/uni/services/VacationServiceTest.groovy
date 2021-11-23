@@ -19,14 +19,16 @@ class VacationServiceTest extends Specification{
         vacationService = new VacationService(vacationRepository)
         vacation = new Vacation()
     }
-//todo fix test
+
     def "VacationRepository is used in findById(long) "(){
         given:
-        vacationRepository.findById(0) >> vacation
+        VacationRepository stubRepo = Stub(VacationRepository)
+        VacationService service = new VacationService(stubRepo)
+        stubRepo.findById(1) >> Optional.of(vacation)
         when:
-        vacationService.findById(0)
+        Vacation testVacation = service.findById(1)
         then:
-        1 * vacationRepository.findById(0)
+        testVacation == vacation
     }
 
     def "VacationRepository is used in save(Vacation) "(){

@@ -10,10 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.List;
-
-import static java.lang.String.format;
-
 @SessionAttributes({"subject", "teacher"})
 @RequestMapping("/subjects")
 @AllArgsConstructor
@@ -24,26 +20,22 @@ public class SubjectController {
     @ApiOperation(value = "Get all subjects")
     @GetMapping("/list")
     public String list(Model model) {
-        List<Subject> subjects = subjectService.findAll();
-        model.addAttribute("subjects", subjects);
+        model.addAttribute("subjects", subjectService.findAll());
         return "subjects/get-subjects";
     }
 
     @ApiOperation(value = "Get subject by id")
     @GetMapping("/{id}")
     public String subjectInfo(@PathVariable("id") long id, Model model) {
-        Subject subject = subjectService.findById(id);
-        model.addAttribute("subject", subject);
+        model.addAttribute("subject", subjectService.findById(id));
         return "subjects/subject-info";
     }
 
     @ApiOperation(value = "Create new subject")
     @GetMapping("/add/new")
     public String createSubject(Model model) {
-        Subject subject = new Subject();
-        List<Teacher> teachers = teacherService.findAll();
-        model.addAttribute("teachers", teachers);
-        model.addAttribute("subject", subject);
+        model.addAttribute("teachers", teacherService.findAll());
+        model.addAttribute("subject", new Subject());
         return "subjects/add-subject";
     }
 
@@ -52,17 +44,14 @@ public class SubjectController {
     @PostMapping("/add")
     public String addSubject(Subject subject) {
         subjectService.save(subject);
-//        subjectService.addTeacher(subject, subject.getSupervisor());
         return "redirect:/subjects/add/new";
     }
 
     @ApiOperation(value = "Edit subject by id")
     @GetMapping("/edit/{id}")
     public String editSubject(@PathVariable("id") long id, Model model) {
-        Subject subject = subjectService.findById(id);
-        List<Teacher> teachers = teacherService.findAll();
-        model.addAttribute("teachers", teachers);
-        model.addAttribute("subject", subject);
+        model.addAttribute("teachers", teacherService.findAll());
+        model.addAttribute("subject", subjectService.findById(id));
         return "subjects/edit-subject";
     }
 
@@ -85,19 +74,16 @@ public class SubjectController {
     @ApiIgnore
     @PostMapping("/add/teacher/{subjectId}")
     public String addTeacher(Teacher teacher, @PathVariable("subjectId") long subjectId) {
-        teacher = teacherService.findById(teacher.getId());
-        Subject subject = subjectService.findById(subjectId);
-        subjectService.addTeacher(subject, teacher);
-        subjectService.update(subject);
-        return format("redirect:/subjects/%s", subjectId);
+        subjectService.addTeacher(subjectService.findById(subjectId), teacherService.findById(teacher.getId()));
+        subjectService.update(subjectService.findById(subjectId));
+        return String.format("redirect:/subjects/%s", subjectId);
     }
 
     @ApiOperation(value = "Add teacher to subject")
     @GetMapping("/add-teacher/{id}")
     public String saveTeacher(@PathVariable("id") long id, Model model) {
-        Teacher teacher = new Teacher();
         model.addAttribute("subjectId", id);
-        model.addAttribute("teacher", teacher);
+        model.addAttribute("teacher", new Teacher());
         return "subjects/add-teacher";
     }
 }

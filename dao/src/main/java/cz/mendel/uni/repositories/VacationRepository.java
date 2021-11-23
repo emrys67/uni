@@ -13,8 +13,8 @@ public interface VacationRepository extends CrudRepository<Vacation, Long> {
     @Override
     List<Vacation> findAll();
 
-    @Transactional
-    @Modifying
-    @Query("update Vacation c set c.description = ?1, c.timePeriod = ?2 where c.id = ?3")
-    void update(String description, TimePeriod timePeriod, long id);
+//    @Transactional
+//    @Modifying
+//    @Query("update Vacation c set c.description = ?1, c.timePeriod = ?2 where c.id = ?3")
+//    void update(String description, TimePeriod timePeriod, long id);
 }

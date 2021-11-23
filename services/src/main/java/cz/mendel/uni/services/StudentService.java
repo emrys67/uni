@@ -4,55 +4,51 @@ import cz.mendel.uni.entities.Student;
 import cz.mendel.uni.repositories.StudentRepository;
 import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import static java.lang.String.format;
-
+@Slf4j
 @AllArgsConstructor
 public class StudentService {
-    private static final Logger logger = LoggerFactory.getLogger(StudentService.class.getName());
     private StudentRepository studentRepository;
 
     public Student findById(long id) {
-        logger.debug("Start service for getting student id {}", id);
+        log.debug("Start service for getting student id {}", id);
         return studentRepository.findById(id).orElseThrow(() -> {
-            String msg = format("Student with Id [%s] doesn't exist", id);
-            logger.warn(msg);
+            String msg = String.format("Student with Id [%s] doesn't exist", id);
+            log.warn(msg);
             throw new ServiceException(msg);
         });
     }
 
     public Student save(Student student) {
-        logger.debug("Start service for saving student");
+        log.debug("Start service for saving student");
         if (student == null) {
             String msg = "Student can't be null";
-            logger.warn(msg);
+            log.warn(msg);
             throw new ServiceException(msg);
         }
         return studentRepository.save(student);
     }
 
     public List<Student> findAll() {
-        logger.debug("Start service for getting all students");
+        log.debug("Start service for getting all students");
         return studentRepository.findAll();
     }
 
     public void deleteById(long id) {
-        logger.debug("Start service for deleting student id {}", id);
+        log.debug("Start service for deleting student id {}", id);
         studentRepository.deleteById(id);
     }
 
     public void update(Student student) {
-        logger.debug("Start service for updating student");
+        log.debug("Start service for updating student");
         if (student == null) {
             String msg = "Student can't be null";
-            logger.warn(msg);
+            log.warn(msg);
             throw new ServiceException(msg);
         }
-        studentRepository.update(student.getFirstname(), student.getLastname(), student.getGender(),
-                student.getDateOfBirth(), student.getStudyYear(), student.getId());
+        studentRepository.save(student);
     }
 }

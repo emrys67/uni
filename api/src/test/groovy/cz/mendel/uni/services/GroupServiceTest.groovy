@@ -19,14 +19,16 @@ class GroupServiceTest extends Specification{
         groupService = new GroupService(groupRepository)
         group = new Group()
     }
-//todo fix test
+
     def "GroupRepository is used in findById(long) "(){
         given:
-        groupRepository.findById(0) >> group
+        GroupRepository stubRepo = Stub(GroupRepository)
+        GroupService service = new GroupService(stubRepo)
+        stubRepo.findById(1) >> Optional.of(group)
         when:
-        groupService.findById(0)
+        Group testGroup = service.findById(1)
         then:
-        1 * groupRepository.findById(0)
+        testGroup == group
     }
 
     def "GroupRepository is used in save(Group) "(){

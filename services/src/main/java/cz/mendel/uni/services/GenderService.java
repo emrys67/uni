@@ -4,55 +4,52 @@ import cz.mendel.uni.entities.Gender;
 import cz.mendel.uni.repositories.GenderRepository;
 import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import static java.lang.String.format;
-
+@Slf4j
 @AllArgsConstructor
 public class GenderService {
-    private static final Logger logger = LoggerFactory.getLogger(GenderService.class.getName());
     private GenderRepository genderRepository;
 
     public Gender findById(long id) {
-        logger.debug("Start service for getting gender id {}", id);
+        log.debug("Start service for getting gender id {}", id);
         return genderRepository.findById(id).orElseThrow(() -> {
-            String msg = format("Gender with Id [%s] doesn't exist", id);
-            logger.warn(msg);
+            String msg = String.format("Gender with Id [%s] doesn't exist", id);
+            log.warn(msg);
             throw new ServiceException(msg);
         });
     }
 
     public Gender save(Gender gender) {
-        logger.debug("Start service for saving gender");
+        log.debug("Start service for saving gender");
         if (gender == null) {
             String msg = "Gender can't be null";
-            logger.warn(msg);
+            log.warn(msg);
             throw new ServiceException(msg);
         }
         return genderRepository.save(gender);
     }
 
     public List<Gender> findAll() {
-        logger.debug("Start service for getting all genders");
+        log.debug("Start service for getting all genders");
         return genderRepository.findAll();
     }
 
     public void deleteById(long id) {
-        logger.debug("Start service for deleting gender id {}", id);
+        log.debug("Start service for deleting gender id {}", id);
         genderRepository.deleteById(id);
     }
 
     public void update(Gender gender) {
-        logger.debug("Start service for updating gender");
+        log.debug("Start service for updating gender");
         if (gender == null) {
             String msg = "Gender can't be null";
-            logger.warn(msg);
+            log.warn(msg);
             throw new ServiceException(msg);
         }
-        genderRepository.update(gender.getName(), gender.getId());
+        genderRepository.save(gender);
     }
 
 }

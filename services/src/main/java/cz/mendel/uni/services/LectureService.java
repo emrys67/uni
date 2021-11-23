@@ -6,73 +6,77 @@ import cz.mendel.uni.entities.Lecture;
 import cz.mendel.uni.repositories.LectureRepository;
 import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static java.lang.String.format;
-
+@Slf4j
 @AllArgsConstructor
 public class LectureService {
-    private static final Logger logger = LoggerFactory.getLogger(LectureService.class.getName());
     private LectureRepository lectureRepository;
 
     public Lecture findById(long id) {
-        logger.debug("Start service for getting lecture id {}", id);
+        log.debug("Start service for getting lecture id {}", id);
         return lectureRepository.findById(id).orElseThrow(() -> {
-            String msg = format("Lecture with Id [%s] doesn't exist", id);
-            logger.warn(msg);
+            String msg = String.format("Lecture with Id [%s] doesn't exist", id);
+            log.warn(msg);
             throw new ServiceException(msg);
         });
     }
 
     public Lecture save(Lecture lecture) {
-        logger.debug("Start service for saving lecture");
+        log.debug("Start service for saving lecture");
         if (lecture == null) {
             String msg = "Lecture can't be null";
-            logger.warn(msg);
+            log.warn(msg);
             throw new ServiceException(msg);
         }
         return lectureRepository.save(lecture);
     }
 
     public List<Lecture> findAll() {
-        logger.debug("Start service for getting all lectures");
+        log.debug("Start service for getting all lectures");
         return lectureRepository.findAll();
     }
 
+//    public List<Lecture> sortLectures(List<Lecture> list){
+//        Comparator<Lecture> comparator = Comparator.comparing(lecture -> lecture.getTimePeriod().getStartDate());
+//        comparator = comparator.thenComparing(Comparator.comparing(lecture -> lecture.getTimePeriod().getStartTime()));
+//        return list.stream().sorted(comparator).collect(Collectors.toList());
+//    }
+
     public void deleteById(long id) {
-        logger.debug("Start service for deleting lecture id {}", id);
+        log.debug("Start service for deleting lecture id {}", id);
         lectureRepository.deleteById(id);
     }
 
     public void update(Lecture lecture) {
-        logger.debug("Start service for updating lecture");
+        log.debug("Start service for updating lecture");
         if (lecture == null) {
             String msg = "Lecture can't be null";
-            logger.warn(msg);
+            log.warn(msg);
             throw new ServiceException(msg);
         }
-        lectureRepository.update(lecture.getSubject(), lecture.getClassroom(), lecture.getTimePeriod(),
-                lecture.getTeacher(), lecture.getId());
+        lectureRepository.save(lecture);
     }
 
     public void addGroup(Lecture lecture, Group group) {
-        logger.debug("Start service for adding group to the lecture");
+        log.debug("Start service for adding group to the lecture");
         if (lecture == null || group == null) {
             String msg = "Lecture and Group can't be null";
-            logger.warn(msg);
+            log.warn(msg);
             throw new ServiceException(msg);
         }
         lecture.addGroup(group);
     }
 
     public void deleteGroup(Lecture lecture, Group group) {
-        logger.debug("Start service for deleting group from the lecture");
+        log.debug("Start service for deleting group from the lecture");
         if (lecture == null || group == null) {
             String msg = "Lecture and Group can't be null";
-            logger.warn(msg);
+            log.warn(msg);
             throw new ServiceException(msg);
         }
         lecture.deleteGroup(group);

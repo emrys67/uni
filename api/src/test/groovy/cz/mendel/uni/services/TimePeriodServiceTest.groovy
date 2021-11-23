@@ -19,14 +19,16 @@ class TimePeriodServiceTest extends Specification{
         timePeriodService = new TimePeriodService(timePeriodRepository)
         timePeriod = new TimePeriod()
     }
-//todo fix test
+
     def "TimePeriodRepository is used in findById(long) "(){
         given:
-        timePeriodRepository.findById(0) >> timePeriod
+        TimePeriodRepository stubRepo = Stub(TimePeriodRepository)
+        TimePeriodService service = new TimePeriodService(stubRepo)
+        stubRepo.findById(1) >> Optional.of(timePeriod)
         when:
-        timePeriodService.findById(0)
+        TimePeriod testTimePeriod = service.findById(1)
         then:
-        1 * timePeriodRepository.findById(0)
+        testTimePeriod == timePeriod
     }
 
     def "TimePeriodRepository is used in save(TimePeriod) "(){

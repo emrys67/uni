@@ -19,14 +19,16 @@ class StudentServiceTest extends Specification{
         studentService = new StudentService(studentRepository)
         student = new Student()
     }
-//todo fix test
+
     def "StudentRepository is used in findById(long) "(){
         given:
-        studentRepository.findById(0) >> student
+        StudentRepository stubRepo = Stub(StudentRepository)
+        StudentService service = new StudentService(stubRepo)
+        stubRepo.findById(1) >> Optional.of(student)
         when:
-        studentService.findById(0)
+        Student testStudent = service.findById(1)
         then:
-        1 * studentRepository.findById(0)
+        testStudent == student
     }
 
     def "StudentRepository is used in save(Student) "(){
@@ -41,7 +43,7 @@ class StudentServiceTest extends Specification{
         studentService.update(student)
         then:
         1 * studentRepository.update(student.getFirstname(), student.getLastname(), student.getGender(),
-                student.getDateOfBirth(), student.getStudyYear(), student.getGroup(), student.getId())
+                student.getDateOfBirth(), student.getStudyYear(), student.getId())
     }
 
     def "StudentRepository is used in findAll() "(){

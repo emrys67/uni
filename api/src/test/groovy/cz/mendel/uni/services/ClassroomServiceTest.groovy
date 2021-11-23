@@ -16,17 +16,19 @@ class ClassroomServiceTest extends Specification{
 
     def setup(){
         classroomRepository = Mock()
-        classroomService = new ClassroomService(classroomRepository)
         classroom = new Classroom()
+        classroomService = new ClassroomService(classroomRepository)
     }
-//todo fix test
+
     def "ClassroomRepository is used in findById(long) "(){
+        ClassroomRepository stubRepository = Stub(ClassroomRepository)
+        ClassroomService service = new ClassroomService(stubRepository)
         given:
-        classroomRepository.findById(0) >> classroom
+        stubRepository.findById(1) >> Optional.of(classroom)
         when:
-        classroomService.findById(0)
+        Classroom testClassroom = service.findById(1)
         then:
-        1 * classroomRepository.findById(0)
+        testClassroom == classroom
     }
 
     def "ClassroomRepository is used in save(Classroom) "(){

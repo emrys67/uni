@@ -19,14 +19,16 @@ class LectureServiceTest extends Specification{
         lectureService = new LectureService(lectureRepository)
         lecture = new Lecture()
     }
-//todo fix test
+
     def "LectureRepository is used in findById(long) "(){
         given:
-        lectureRepository.findById(0) >> lecture
+        LectureRepository stubRepo = Stub(LectureRepository)
+        LectureService service = new LectureService(stubRepo)
+        stubRepo.findById(1) >> Optional.of(lecture)
         when:
-        lectureService.findById(0)
+        Lecture testLecture = service.findById(1)
         then:
-        1 * lectureRepository.findById(0)
+        testLecture == lecture
     }
 
     def "LectureRepository is used in save(Lecture) "(){

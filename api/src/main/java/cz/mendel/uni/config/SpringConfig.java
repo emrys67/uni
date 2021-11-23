@@ -28,6 +28,8 @@ public class SpringConfig {
     private TimePeriodRepository timePeriodRepository;
     @Autowired
     private VacationRepository vacationRepository;
+    @Autowired
+    private LectureRepository lectureRepository;
 
     @Bean
     public ClassroomService classroomService() {
@@ -67,6 +69,11 @@ public class SpringConfig {
     @Bean
     public VacationService vacationService() {
         return new VacationService(vacationRepository);
+    }
+
+    @Bean
+    public LectureService lectureService(){
+        return new LectureService(lectureRepository);
     }
 
     @Bean
@@ -113,5 +120,10 @@ public class SpringConfig {
     @Bean
     public SubjectController subjectController() {
         return new SubjectController(context.getBean(SubjectService.class), context.getBean(TeacherService.class));
+    }
+
+    @Bean
+    public TimeTableController timeTableController(){
+        return new TimeTableController(context.getBean(LectureService.class));
     }
 }

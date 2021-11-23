@@ -12,9 +12,9 @@ import java.util.List;
 public interface SubjectRepository extends CrudRepository<Subject, Long> {
     @Override
     List<Subject> findAll();
-
-    @Transactional
-    @Modifying
-    @Query("update Subject c set c.name = ?1, c.description = ?2, c.supervisor = ?3 where c.id = ?4")
-    void update(String name, String description, Teacher supervisor, long id);
+//
+//    @Transactional
+//    @Modifying
+//    @Query("update Subject c set c.name = ?1, c.description = ?2, c.supervisor = ?3 where c.id = ?4")
+//    void update(String name, String description, Teacher supervisor, long id);
 }

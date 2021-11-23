@@ -12,10 +12,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "classrooms")
+@Table(name = "classroom")
 public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_classroom")
     private long id;
     private int capacity;
 }

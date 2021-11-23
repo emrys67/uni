@@ -19,14 +19,16 @@ class TeacherServiceTest extends Specification{
         teacherService = new TeacherService(teacherRepository)
         teacher = new Teacher()
     }
-//todo fix test
+
     def "TeacherRepository is used in findById(long) "(){
         given:
-        teacherRepository.findById(0) >> teacher
+        TeacherRepository stubRepo = Stub(TeacherRepository)
+        TeacherService service = new TeacherService(stubRepo)
+        stubRepo.findById(1) >> Optional.of(teacher)
         when:
-        teacherService.findById(0)
+        Teacher testTeacher = service.findById(1)
         then:
-        1 * teacherRepository.findById(0)
+        testTeacher == teacher
     }
 
     def "TeacherRepository is used in save(Classroom) "(){

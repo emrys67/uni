@@ -14,10 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "teachers", schema = "public")
+@Table(name = "teacher", schema = "public")
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_teacher")
     private long id;
     @OneToOne
     @JoinColumn(name = "vacation_id")

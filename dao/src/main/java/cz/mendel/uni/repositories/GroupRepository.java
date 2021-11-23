@@ -11,9 +11,9 @@ import java.util.List;
 public interface GroupRepository extends CrudRepository<Group, Long> {
     @Override
     List<Group> findAll();
-
-    @Transactional
-    @Modifying
-    @Query("update Group c set c.name = ?1 where c.id = ?2")
-    void update(String name, long id);
+//
+//    @Transactional
+//    @Modifying
+//    @Query("update Group c set c.name = ?1 where c.id = ?2")
+//    void update(String name, long id);
 }

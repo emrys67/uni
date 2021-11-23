@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.List;
 @SessionAttributes("student")
 @RequestMapping("/students")
 @AllArgsConstructor
@@ -19,16 +18,14 @@ public class StudentController {
     @ApiOperation(value = "Get all students")
     @GetMapping("/list")
     public String students(Model model) {
-        List<Student> students = studentService.findAll();
-        model.addAttribute("students", students);
+        model.addAttribute("students", studentService.findAll());
         return "students/get-students";
     }
 
     @ApiOperation(value = "Get student by id")
     @GetMapping("/{id}")
     public String studentInfo(@PathVariable("id") long id, Model model) {
-        Student student = studentService.findById(id);
-        model.addAttribute("student", student);
+        model.addAttribute("student", studentService.findById(id));
         return "students/student-info";
     }
 
@@ -52,8 +49,7 @@ public class StudentController {
     @ApiOperation(value = "Edit student by id")
     @GetMapping("/edit/{id}")
     public String editStudent(@PathVariable("id") long id, Model model) {
-        Student student = studentService.findById(id);
-        model.addAttribute("student", student);
+        model.addAttribute("student", studentService.findById(id));
         return "students/edit-student";
     }
 

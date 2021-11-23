@@ -13,17 +13,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "lectures", schema = "public")
+@Table(name = "lecture", schema = "public")
 public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_lecture")
     private long id;
     @ManyToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
     @ManyToMany
     @JoinTable(
-            name = "lectures_groups",
+            name = "lecture_group",
             joinColumns = {@JoinColumn(name = "lecture_id")},
             inverseJoinColumns = {@JoinColumn(name = "group_id")}
     )
