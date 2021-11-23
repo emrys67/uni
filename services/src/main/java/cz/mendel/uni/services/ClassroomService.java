@@ -2,7 +2,6 @@ package cz.mendel.uni.services;
 
 import cz.mendel.uni.entities.Classroom;
 import cz.mendel.uni.repositories.ClassroomRepository;
-import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +15,7 @@ public class ClassroomService {
 
     public Classroom findById(long id) {
         log.debug("Start service for getting classroom id {}", id);
-        return classroomRepository.findById(id).orElseThrow(() -> {
-            String msg = String.format("Classroom with Id [%s] doesn't exist", id);
-            throw new ServiceException(msg);
-        });
+        return classroomRepository.findById(id).orElse(null);
     }
 
     @NonNull

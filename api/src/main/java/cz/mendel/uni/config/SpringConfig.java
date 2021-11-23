@@ -1,6 +1,7 @@
 package cz.mendel.uni.config;
 
 import cz.mendel.uni.controllers.*;
+import cz.mendel.uni.controllers.exceptions.ExceptionHandlerController;
 import cz.mendel.uni.repositories.*;
 import cz.mendel.uni.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,5 +121,10 @@ public class SpringConfig {
     @Bean
     public SubjectController subjectController() {
         return new SubjectController(context.getBean(SubjectService.class), context.getBean(TeacherService.class));
+    }
+
+    @Bean
+    public ExceptionHandlerController exceptionHandlerController(){
+        return new ExceptionHandlerController();
     }
 }

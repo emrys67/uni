@@ -3,7 +3,6 @@ package cz.mendel.uni.services;
 import cz.mendel.uni.entities.Group;
 import cz.mendel.uni.entities.Lecture;
 import cz.mendel.uni.repositories.LectureRepository;
-import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +16,7 @@ public class LectureService {
 
     public Lecture findById(long id) {
         log.debug("Start service for getting lecture id {}", id);
-        return lectureRepository.findById(id).orElseThrow(() -> {
-            String msg = String.format("Lecture with Id [%s] doesn't exist", id);
-            throw new ServiceException(msg);
-        });
+        return lectureRepository.findById(id).orElse(null);
     }
 
     @NonNull

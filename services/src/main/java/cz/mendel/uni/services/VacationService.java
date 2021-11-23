@@ -2,7 +2,6 @@ package cz.mendel.uni.services;
 
 import cz.mendel.uni.entities.Vacation;
 import cz.mendel.uni.repositories.VacationRepository;
-import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +15,7 @@ public class VacationService {
 
     public Vacation findById(long id) {
         log.debug("Start service for getting vacation id {}", id);
-        return vacationRepository.findById(id).orElseThrow(() -> {
-            String msg = String.format("Vacation with Id [%s] doesn't exist", id);
-            throw new ServiceException(msg);
-        });
+        return vacationRepository.findById(id).orElse(null);
     }
 
     @NonNull

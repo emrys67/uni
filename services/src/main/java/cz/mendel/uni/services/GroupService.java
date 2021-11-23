@@ -3,7 +3,6 @@ package cz.mendel.uni.services;
 import cz.mendel.uni.entities.Group;
 import cz.mendel.uni.entities.Student;
 import cz.mendel.uni.repositories.GroupRepository;
-import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +16,7 @@ public class GroupService {
 
     public Group findById(long id) {
         log.debug("Start service for getting group id {}", id);
-        return groupRepository.findById(id).orElseThrow(() -> {
-            String msg = String.format("Group with Id [%s] doesn't exist", id);
-            throw new ServiceException(msg);
-        });
+        return groupRepository.findById(id).orElse(null);
     }
 
     @NonNull

@@ -2,7 +2,6 @@ package cz.mendel.uni.services;
 
 import cz.mendel.uni.entities.TimePeriod;
 import cz.mendel.uni.repositories.TimePeriodRepository;
-import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +15,7 @@ public class TimePeriodService {
 
     public TimePeriod findById(long id) {
         log.debug("Start service for getting timeperiod id {}", id);
-        return timePeriodRepository.findById(id).orElseThrow(() -> {
-            String msg = String.format("TimePeriod with Id [%s] doesn't exist", id);
-            throw new ServiceException(msg);
-        });
+        return timePeriodRepository.findById(id).orElse(null);
     }
 
     @NonNull

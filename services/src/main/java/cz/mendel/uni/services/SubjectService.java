@@ -3,7 +3,6 @@ package cz.mendel.uni.services;
 import cz.mendel.uni.entities.Subject;
 import cz.mendel.uni.entities.Teacher;
 import cz.mendel.uni.repositories.SubjectRepository;
-import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +16,7 @@ public class SubjectService {
 
     public Subject findById(long id) {
         log.debug("Start service for getting subject id {}", id);
-        return subjectRepository.findById(id).orElseThrow(() -> {
-            String msg = String.format("Subject with Id [%s] doesn't exist", id);
-            throw new ServiceException(msg);
-        });
+        return subjectRepository.findById(id).orElse(null);
     }
 
     @NonNull
