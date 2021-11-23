@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -14,10 +15,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "teachers", schema = "public")
+@Table(name = "teacher", schema = "public")
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_teacher")
     private long id;
     @OneToOne
     @JoinColumn(name = "vacation_id")
@@ -30,7 +32,8 @@ public class Teacher {
     @ManyToOne
     @JoinColumn(name = "gender_id")
     private Gender gender;
-    private Date dateOfBirth;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dateOfBirth;
     @ManyToMany(mappedBy = "teachers")
     private List<Subject> subjects;
 }

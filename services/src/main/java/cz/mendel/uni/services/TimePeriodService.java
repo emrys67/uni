@@ -2,57 +2,41 @@ package cz.mendel.uni.services;
 
 import cz.mendel.uni.entities.TimePeriod;
 import cz.mendel.uni.repositories.TimePeriodRepository;
-import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import static java.lang.String.format;
-
+@Slf4j
 @AllArgsConstructor
 public class TimePeriodService {
-    private static final Logger logger = LoggerFactory.getLogger(TimePeriodService.class.getName());
     private TimePeriodRepository timePeriodRepository;
 
     public TimePeriod findById(long id) {
-        logger.debug("Start service for getting timeperiod id {}", id);
-        return timePeriodRepository.findById(id).orElseThrow(() -> {
-            String msg = format("TimePeriod with Id [%s] doesn't exist", id);
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        });
+        log.debug("Start service for getting timeperiod id {}", id);
+        return timePeriodRepository.findById(id).orElse(null);
     }
 
+    @NonNull
     public TimePeriod save(TimePeriod timePeriod) {
-        logger.debug("Start service for saving timeperiod");
-        if (timePeriod == null) {
-            String msg = "TimePeriod can't be null";
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        }
+        log.debug("Start service for saving timeperiod");
         return timePeriodRepository.save(timePeriod);
     }
 
     public List<TimePeriod> findAll() {
-        logger.debug("Start service for getting all timeperiods");
+        log.debug("Start service for getting all timeperiods");
         return timePeriodRepository.findAll();
     }
 
     public void deleteById(long id) {
-        logger.debug("Start service for deleting timeperiod id {}", id);
+        log.debug("Start service for deleting timeperiod id {}", id);
         timePeriodRepository.deleteById(id);
     }
 
+    @NonNull
     public void update(TimePeriod timePeriod) {
-        logger.debug("Start service for updating timeperiod");
-        if (timePeriod == null) {
-            String msg = "TimePeriod can't be null";
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        }
-        timePeriodRepository.update(timePeriod.getStartDate(), timePeriod.getStartTime(), timePeriod.getEndTime(),
-                timePeriod.getEndDate(), timePeriod.getId());
+        log.debug("Start service for updating timeperiod");
+        timePeriodRepository.save(timePeriod);
     }
 }

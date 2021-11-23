@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import static java.lang.String.format;
 @SessionAttributes("timeperiod")
 @RequestMapping("/timeperiod")
 @AllArgsConstructor
@@ -17,16 +16,14 @@ public class TimeperiodController {
     @ApiOperation(value = "Get timeperiod by id")
     @GetMapping("/{id}")
     public String timeperiodInfo(@PathVariable("id") long id, Model model) {
-        TimePeriod timeperiod = timePeriodService.findById(id);
-        model.addAttribute("timeperiod", timeperiod);
+        model.addAttribute("timeperiod", timePeriodService.findById(id));
         return "timeperiods/timeperiod-info";
     }
 
     @ApiOperation(value = "Create new timeperiod")
     @GetMapping("/add/new")
     public String addTimeperiod(Model model) {
-        TimePeriod timePeriod = new TimePeriod();
-        model.addAttribute("timeperiod", timePeriod);
+        model.addAttribute("timeperiod", new TimePeriod());
         return "timeperiods/add-timeperiod";
     }
 
@@ -40,8 +37,7 @@ public class TimeperiodController {
     @ApiOperation(value = "Edit timeperiod by id")
     @GetMapping("/edit/{id}")
     public String editTimeperiod(@PathVariable("id") long id, Model model) {
-        TimePeriod timePeriod = timePeriodService.findById(id);
-        model.addAttribute("timeperiod", timePeriod);
+        model.addAttribute("timeperiod", timePeriodService.findById(id));
         return "timeperiods/edit-timeperiod";
     }
 
@@ -49,7 +45,7 @@ public class TimeperiodController {
     @PostMapping("/edit")
     public String editTimeperiod(TimePeriod timePeriod) {
         timePeriodService.update(timePeriod);
-        return format("redirect:/timeperiod/%s", timePeriod.getId());
+        return String.format("redirect:/timeperiod/%s", timePeriod.getId());
     }
 
     @ApiOperation(value = "Delete timeperiod by id")

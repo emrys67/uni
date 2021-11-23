@@ -7,27 +7,18 @@
 <body>
 <nav th:replace="layouts :: navbar"></nav>
 <form th:object="${timeperiod}" th:action="@{/timeperiod/add}" method="post">
-    <!--    <input type="text" th:value="${classroom.capacity}" th:field="${classroom.capacity}"> Capacity-->
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <span class="input-group-text" >Start date</span>
+            <span class="input-group-text">Start time</span>
         </div>
-        <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
-               th:field="${timeperiod.startDate}">
-        <div class="input-group-prepend">
-            <span class="input-group-text" >Start time</span>
-        </div>
-        <input type="time" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+        <input type="datetime-local" class="form-control" aria-label="Default"
+               aria-describedby="inputGroup-sizing-default"
                th:field="${timeperiod.startTime}">
         <div class="input-group-prepend">
-            <span class="input-group-text" >End date</span>
+            <span class="input-group-text">End time</span>
         </div>
-        <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
-               th:field="${timeperiod.endDate}">
-        <div class="input-group-prepend">
-            <span class="input-group-text" >End time</span>
-        </div>
-        <input type="time" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+        <input type="datetime-local" class="form-control" aria-label="Default"
+               aria-describedby="inputGroup-sizing-default"
                th:field="${timeperiod.endTime}">
         <input type="submit">
     </div>

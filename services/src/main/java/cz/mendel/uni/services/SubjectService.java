@@ -3,76 +3,53 @@ package cz.mendel.uni.services;
 import cz.mendel.uni.entities.Subject;
 import cz.mendel.uni.entities.Teacher;
 import cz.mendel.uni.repositories.SubjectRepository;
-import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import static java.lang.String.format;
-
+@Slf4j
 @AllArgsConstructor
 public class SubjectService {
-    private static final Logger logger = LoggerFactory.getLogger(SubjectService.class.getName());
     private SubjectRepository subjectRepository;
 
     public Subject findById(long id) {
-        logger.debug("Start service for getting subject id {}", id);
-        return subjectRepository.findById(id).orElseThrow(() -> {
-            String msg = format("Subject with Id [%s] doesn't exist", id);
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        });
+        log.debug("Start service for getting subject id {}", id);
+        return subjectRepository.findById(id).orElse(null);
     }
 
+    @NonNull
     public Subject save(Subject subject) {
-        logger.debug("Start service for saving subject");
-        if (subject == null) {
-            String msg = "Subject can't be null";
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        }
+        log.debug("Start service for saving subject");
         return subjectRepository.save(subject);
     }
 
     public List<Subject> findAll() {
-        logger.debug("Start service for getting all subjects");
+        log.debug("Start service for getting all subjects");
         return subjectRepository.findAll();
     }
 
     public void deleteById(long id) {
-        logger.debug("Start service for deleting subject id {}", id);
+        log.debug("Start service for deleting subject id {}", id);
         subjectRepository.deleteById(id);
     }
 
+    @NonNull
     public void update(Subject subject) {
-        logger.debug("Start service for updating subject");
-        if (subject == null) {
-            String msg = "Subject can't be null";
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        }
-        subjectRepository.update(subject.getName(), subject.getDescription(), subject.getSupervisor(), subject.getId());
+        log.debug("Start service for updating subject");
+        subjectRepository.save(subject);
     }
 
+    @NonNull
     public void addTeacher(Subject subject, Teacher teacher) {
-        logger.debug("Start service for adding teacher to the subject");
-        if (subject == null || teacher == null) {
-            String msg = "Subject and Teacher can't be null";
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        }
+        log.debug("Start service for adding teacher to the subject");
         subject.addTeacher(teacher);
     }
 
+    @NonNull
     public void deleteTeacher(Subject subject, Teacher teacher) {
-        logger.debug("Start service for deleting teacher from the subject ");
-        if (subject == null || teacher == null) {
-            String msg = "Subject and Teacher can't be null";
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        }
+        log.debug("Start service for deleting teacher from the subject ");
         subject.deleteTeacher(teacher);
     }
 }

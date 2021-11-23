@@ -31,7 +31,7 @@ class GenderControllerTest extends Specification {
 
     def "Status is OK and model has attribute Gender and view returned for /gender/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(genderController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(genderController).setControllerAdvice(new ExceptionHandlerController()).build()
         genderService.findById(1) >> gender
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/gender/1"))
@@ -44,12 +44,12 @@ class GenderControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/gender/1"))
         then:
-        1 * genderService.findById(1);
+        1 * genderService.findById(1)
     }
 
     def "Status is OK and model has attribute Gender and view returned for /gender/add/new"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(genderController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(genderController).setControllerAdvice(new ExceptionHandlerController()).build()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/gender/add/new"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -61,12 +61,12 @@ class GenderControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/gender/add"))
         then:
-        1 * genderService.save(*_);
+        1 * genderService.save(*_)
     }
 
     def "Status is OK and model has attribute Gender and view returned for /gender/edit/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(genderController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(genderController).setControllerAdvice(new ExceptionHandlerController()).build()
         genderService.findById(1) >> gender
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/gender/edit/1"))
@@ -79,20 +79,20 @@ class GenderControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/gender/edit/1"))
         then:
-        1 * genderService.findById(1);
+        1 * genderService.findById(1)
     }
 
     def "GenderService is used in /gender/edit"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/gender/edit"))
         then:
-        1 * genderService.update(*_);
+        1 * genderService.update(*_)
     }
 
     def "GenderService is used in /gender/delete/{id}"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/gender/delete/1"))
         then:
-        1 * genderService.deleteById(*_);
+        1 * genderService.deleteById(*_)
     }
 }

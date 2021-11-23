@@ -23,7 +23,7 @@ class VacationControllerTest extends Specification {
     private MockMvc mockMvc
     private Vacation vacation = new Vacation()
     private VacationService vacationService
-    private TimePeriodService timePeriodService;
+    private TimePeriodService timePeriodService
     private VacationController vacationController
 
     def setup() {
@@ -35,7 +35,7 @@ class VacationControllerTest extends Specification {
 
     def "Status is OK and model has attribute Vacation and view returned for /vacation/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(vacationController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(vacationController).setControllerAdvice(new ExceptionHandlerController()).build()
         vacationService.findById(1) >> vacation
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/vacation/1"))
@@ -48,12 +48,12 @@ class VacationControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/vacation/1"))
         then:
-        1 * vacationService.findById(1);
+        1 * vacationService.findById(1)
     }
 
     def "Status is OK and model has attribute Vacation and view returned for /vacation/add/new"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(vacationController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(vacationController).setControllerAdvice(new ExceptionHandlerController()).build()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/vacation/add/new"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -65,13 +65,13 @@ class VacationControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/vacation/add"))
         then:
-        1 * vacationService.save(*_);
+        1 * vacationService.save(*_)
         1 * timePeriodService.save(*_)
     }
 
     def "Status is OK and model has attribute Vacation and view returned for /vacation/edit/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(vacationController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(vacationController).setControllerAdvice(new ExceptionHandlerController()).build()
         vacationService.findById(1) >> vacation
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/vacation/edit/1"))
@@ -84,20 +84,20 @@ class VacationControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/vacation/edit/1"))
         then:
-        1 * vacationService.findById(1);
+        1 * vacationService.findById(1)
     }
 
     def "VacationService is used in /vacation/edit"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/vacation/edit"))
         then:
-        1 * vacationService.update(*_);
+        1 * vacationService.update(*_)
     }
 
     def "VacationService is used in /vacation/delete/{id}"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/vacation/delete/1"))
         then:
-        1 * vacationService.deleteById(*_);
+        1 * vacationService.deleteById(*_)
     }
 }

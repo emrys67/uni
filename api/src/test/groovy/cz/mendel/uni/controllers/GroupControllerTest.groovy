@@ -23,7 +23,7 @@ class GroupControllerTest extends Specification {
     private MockMvc mockMvc
     private Group group = new Group()
     private GroupService groupService
-    private StudentService studentService;
+    private StudentService studentService
     private GroupController groupController
 
     def setup() {
@@ -35,7 +35,7 @@ class GroupControllerTest extends Specification {
 
     def "Status is OK and model has attribute Group and view returned for /groups/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build()
         groupService.findById(1) >> group
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/groups/1"))
@@ -48,12 +48,12 @@ class GroupControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/groups/1"))
         then:
-        1 * groupService.findById(1);
+        1 * groupService.findById(1)
     }
 
     def "Status is OK and model has attribute Group and view returned for /groups/add/new"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/groups/add/new"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -65,12 +65,12 @@ class GroupControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/groups/add"))
         then:
-        1 * groupService.save(*_);
+        1 * groupService.save(*_)
     }
 
     def "Status is OK and model has attribute Group and view returned for /groups/edit/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build()
         groupService.findById(1) >> group
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/groups/edit/1"))
@@ -83,21 +83,21 @@ class GroupControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/groups/edit/1"))
         then:
-        1 * groupService.findById(1);
+        1 * groupService.findById(1)
     }
 
     def "GroupService is used in /groups/edit"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/groups/edit"))
         then:
-        1 * groupService.update(*_);
+        1 * groupService.update(*_)
     }
 
     def "GroupService is used in /groups/delete/{id}"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/groups/delete/1"))
         then:
-        1 * groupService.deleteById(*_);
+        1 * groupService.deleteById(*_)
     }
 
     def "GroupService and StudentService are used in /groups/add/student/{id}"() {
@@ -111,7 +111,7 @@ class GroupControllerTest extends Specification {
 
     def "Status is OK and model has attribute Group and view returned for /groups/add/student/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/groups/add-student/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -122,7 +122,7 @@ class GroupControllerTest extends Specification {
 
     def "Status is OK and model has attribute Groups and view returned for /groups/list"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(groupController).setControllerAdvice(new ExceptionHandlerController()).build()
         groupService.findAll() >> new ArrayList<Group>()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/groups/list"))

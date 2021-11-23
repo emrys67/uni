@@ -25,9 +25,9 @@ class TeacherControllerTest extends Specification {
     @Autowired
     private MockMvc mockMvc
     private Teacher teacher = new Teacher()
-    private TimePeriodService timePeriodService;
-    private VacationService vacationService;
-    private TeacherService teacherService;
+    private TimePeriodService timePeriodService
+    private VacationService vacationService
+    private TeacherService teacherService
     private TeacherController teacherController
 
     def setup() {
@@ -40,7 +40,7 @@ class TeacherControllerTest extends Specification {
 
     def "Status is OK and model has attribute Teacher and view returned for /teachers/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(teacherController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(teacherController).setControllerAdvice(new ExceptionHandlerController()).build()
         teacherService.findById(1) >> teacher
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/teachers/1"))
@@ -53,12 +53,12 @@ class TeacherControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/teachers/1"))
         then:
-        1 * teacherService.findById(1);
+        1 * teacherService.findById(1)
     }
 
     def "Status is OK and model has attribute Teacher and view returned for /teachers/add/new"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(teacherController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(teacherController).setControllerAdvice(new ExceptionHandlerController()).build()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/teachers/add/new"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -79,7 +79,7 @@ class TeacherControllerTest extends Specification {
 
     def "Status is OK and model has attribute Teacher and view returned for /teachers/edit/{id}"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(teacherController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(teacherController).setControllerAdvice(new ExceptionHandlerController()).build()
         teacherService.findById(1) >> teacher
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/teachers/edit/1"))
@@ -92,26 +92,26 @@ class TeacherControllerTest extends Specification {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/teachers/edit/1"))
         then:
-        1 * teacherService.findById(1);
+        1 * teacherService.findById(1)
     }
 
     def "TeacherService is used in /teachers/edit"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.post("/teachers/edit"))
         then:
-        1 * teacherService.update(*_);
+        1 * teacherService.update(*_)
     }
 
     def "TeacherService is used in /teachers/delete/{id}"() {
         when:
         mockMvc.perform(MockMvcRequestBuilders.get("/teachers/delete/1"))
         then:
-        1 * teacherService.deleteById(*_);
+        1 * teacherService.deleteById(*_)
     }
 
     def "Status is OK and model has attribute Teachers and view returned for /teachers/list"() {
         given:
-        mockMvc = MockMvcBuilders.standaloneSetup(teacherController).setControllerAdvice(new ExceptionHandlerController()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(teacherController).setControllerAdvice(new ExceptionHandlerController()).build()
         teacherService.findAll() >> new ArrayList<>()
         expect: "status is ok"
         mockMvc.perform(MockMvcRequestBuilders.get("/teachers/list"))

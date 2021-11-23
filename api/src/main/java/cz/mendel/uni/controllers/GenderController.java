@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import static java.lang.String.format;
-
 @SessionAttributes("gender")
 @RequestMapping("/gender")
 @AllArgsConstructor
@@ -18,16 +16,14 @@ public class GenderController {
     @ApiOperation(value = "Get gender by id")
     @GetMapping("/{id}")
     public String genderInfo(@PathVariable("id") long id, Model model) {
-        Gender gender = genderService.findById(id);
-        model.addAttribute("gender", gender);
+        model.addAttribute("gender", genderService.findById(id));
         return "genders/gender-info";
     }
 
     @ApiOperation(value = "Edit gender by id")
     @GetMapping("/edit/{id}")
     public String editGender(@PathVariable("id") long id, Model model) {
-        Gender gender = genderService.findById(id);
-        model.addAttribute("gender", gender);
+        model.addAttribute("gender", genderService.findById(id));
         return "genders/edit-gender";
     }
 
@@ -35,14 +31,13 @@ public class GenderController {
     @PostMapping("/edit")
     public String edit(Gender gender) {
         genderService.update(gender);
-        return format("redirect:/gender/%s", gender.getId());
+        return String.format("redirect:/gender/%s", gender.getId());
     }
 
     @ApiOperation(value = "Create new gender")
     @GetMapping("/add/new")
     public String addGender(Model model) {
-        Gender gender = new Gender();
-        model.addAttribute("gender", gender);
+        model.addAttribute("gender", new Gender());
         return "genders/add-gender";
     }
 

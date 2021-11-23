@@ -1,6 +1,6 @@
 package cz.mendel.uni.services.exceptions;
 
-public class ServiceException extends RuntimeException{
+public class ServiceException extends RuntimeException {
     public ServiceException() {
         super();
     }

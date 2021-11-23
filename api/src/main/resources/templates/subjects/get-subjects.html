@@ -27,7 +27,8 @@
         <td th:text="${subject.getDescription()}"></td>
         <td>
             <a class="btn btn-primary"
-               th:href="@{/teachers/{teacherId}(teacherId=${subject.getSupervisor().getId()})}" role="button">Supervisor</a>
+               th:href="@{/teachers/{teacherId}(teacherId=${subject.getSupervisor().getId()})}"
+               role="button">Supervisor</a>
         </td>
         <td>
             <a class="btn btn-primary" th:href="@{/subjects/edit/{subjectId}(subjectId=${subject.getId()})}"

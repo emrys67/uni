@@ -6,5 +6,37 @@
 </head>
 <body>
 <nav th:replace="layouts :: navbar"></nav>
+<form th:object="${teacher}" th:action="@{/teachers/edit}" method="post">
+    <label for="teacher">Choose Teacher:</label>
+    <select id="teacher" th:field="${lecture.teacher.id}" class="custom-select custom-select-sm">
+        <option th:each="teacher: ${teachers}" th:value="${teacher.id}"
+                th:text="${teacher.firstname + ' ' + teacher.lastname}">
+        </option>
+    </select>
+    <br>
+    <br>
+    <label for="subject">Choose Subject:</label>
+    <select id="subject" th:field="${lecture.subject.id}" class="custom-select custom-select-sm">
+        <option th:each="subject: ${subjects}" th:value="${subject.id}"
+                th:text="${subject.name}">
+        </option>
+    </select>
+    <br>
+    <br>
+    <label for="classroom">Choose Classroom:</label>
+    <select id="classroom" th:field="${lecture.classroom.id}" class="custom-select custom-select-sm">
+        <option th:each="classroom: ${classrooms}" th:value="${classroom.id}"
+                th:text="${classroom.id}">
+        </option>
+    </select>
+    <br>
+    <br>
+    <a class="btn btn-primary"
+       th:href="@{/timeperiod/edit/{timeperiodId}(timeperiodId=${teacher.getWorkingHours().getId()})}"
+       role="button">Edit timeperiod</a>
+    <br>
+    <br>
+    <input type="submit">
+</form>
 </body>
 </html>

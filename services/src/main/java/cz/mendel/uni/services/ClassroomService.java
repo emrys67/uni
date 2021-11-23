@@ -2,56 +2,41 @@ package cz.mendel.uni.services;
 
 import cz.mendel.uni.entities.Classroom;
 import cz.mendel.uni.repositories.ClassroomRepository;
-import cz.mendel.uni.services.exceptions.ServiceException;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import static java.lang.String.format;
-
+@Slf4j
 @AllArgsConstructor
 public class ClassroomService {
-    private static final Logger logger = LoggerFactory.getLogger(ClassroomService.class.getName());
     private ClassroomRepository classroomRepository;
 
     public Classroom findById(long id) {
-        logger.debug("Start service for getting classroom id {}", id);
-        return classroomRepository.findById(id).orElseThrow(() -> {
-            String msg = format("Classroom with Id [%s] doesn't exist", id);
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        });
+        log.debug("Start service for getting classroom id {}", id);
+        return classroomRepository.findById(id).orElse(null);
     }
 
+    @NonNull
     public Classroom save(Classroom classroom) {
-        logger.debug("Start service for saving classroom");
-        if (classroom == null) {
-            String msg = "Classroom can't be null";
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        }
+        log.debug("Start service for saving classroom");
         return classroomRepository.save(classroom);
     }
 
+    @NonNull
     public void update(Classroom classroom) {
-        logger.debug("Start service for updating classroom");
-        if (classroom == null) {
-            String msg = "Classroom can't be null";
-            logger.warn(msg);
-            throw new ServiceException(msg);
-        }
-        classroomRepository.update(classroom.getCapacity(), classroom.getId());
+        log.debug("Start service for updating classroom");
+        classroomRepository.save(classroom);
     }
 
     public List<Classroom> findAll() {
-        logger.debug("Start service for getting all classrooms");
+        log.debug("Start service for getting all classrooms");
         return classroomRepository.findAll();
     }
 
     public void deleteById(long id) {
-        logger.debug("Start service for deleting classroom id {}", id);
+        log.debug("Start service for deleting classroom id {}", id);
         classroomRepository.deleteById(id);
     }
 }

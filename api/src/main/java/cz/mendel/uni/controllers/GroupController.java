@@ -10,10 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.List;
-
-import static java.lang.String.format;
-
 @SessionAttributes("group")
 @RequestMapping("/groups")
 @AllArgsConstructor
@@ -24,16 +20,14 @@ public class GroupController {
     @ApiOperation(value = "Get all groups")
     @GetMapping("/list")
     public String home(Model model) {
-        List<Group> list = groupService.findAll();
-        model.addAttribute("groups", list);
+        model.addAttribute("groups", groupService.findAll());
         return "groups/get-groups";
     }
 
     @ApiOperation(value = "Get group by id")
     @GetMapping("/{id}")
     public String groupInfo(@PathVariable("id") long id, Model model) {
-        Group group = groupService.findById(id);
-        model.addAttribute("group", group);
+        model.addAttribute("group", groupService.findById(id));
         return "groups/group-info";
     }
 
@@ -47,8 +41,7 @@ public class GroupController {
     @ApiOperation(value = "Edit group by id")
     @GetMapping("/edit/{id}")
     public String editGroup(@PathVariable("id") long id, Model model) {
-        Group group = groupService.findById(id);
-        model.addAttribute("group", group);
+        model.addAttribute("group", groupService.findById(id));
         return "groups/edit-group";
     }
 
@@ -63,15 +56,14 @@ public class GroupController {
     @ApiOperation(value = "Create new group")
     @GetMapping("/add/new")
     public String addGroup(Model model) {
-        Group group = new Group();
-        model.addAttribute("group", group);
+        model.addAttribute("group", new Group());
         return "groups/add-group";
     }
 
     @ApiOperation(value = "Create new group")
     @ApiIgnore
     @PostMapping("/add")
-    public String add( Group group) {
+    public String add(Group group) {
         groupService.save(new Group().builder().name(group.getName()).build());
         return "redirect:/groups/add/new";
     }
@@ -80,19 +72,17 @@ public class GroupController {
     @ApiIgnore
     @PostMapping("/add/student/{groupId}")
     public String addStudent(Student student, @PathVariable("groupId") long groupId) {
-        student = studentService.findById(student.getId());
         Group group = groupService.findById(groupId);
-        groupService.addStudent(student, group);
+        groupService.addStudent(studentService.findById(student.getId()), group);
         groupService.update(group);
-        return format("redirect:/groups/add-student/%s", groupId);
+        return String.format("redirect:/groups/add-student/%s", groupId);
     }
 
     @ApiOperation(value = "Add student to the group")
     @GetMapping("/add-student/{id}")
     public String saveStudent(@PathVariable("id") long id, Model model) {
-        Student student = new Student();
         model.addAttribute("groupId", id);
-        model.addAttribute("student", student);
+        model.addAttribute("student", new Student());
         return "groups/add-student";
     }
 }
