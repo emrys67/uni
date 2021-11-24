@@ -20,23 +20,23 @@ public class Lecture {
     @Column(name = "id_lecture")
     private long id;
     @ManyToOne
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "id_subject")
     private Subject subject;
     @ManyToMany
     @JoinTable(
             name = "lecture_group",
-            joinColumns = {@JoinColumn(name = "lecture_id")},
-            inverseJoinColumns = {@JoinColumn(name = "group_id")}
+            joinColumns = {@JoinColumn(name = "id_lecture")},
+            inverseJoinColumns = {@JoinColumn(name = "id_group")}
     )
     private List<Group> groups;
     @ManyToOne
-    @JoinColumn(name = "teacher_id")
+    @JoinColumn(name = "id_teacher")
     private Teacher teacher;
     @OneToOne
-    @JoinColumn(name = "time_period_id")
+    @JoinColumn(name = "id_timeperiod")
     private TimePeriod timePeriod;
     @ManyToOne
-    @JoinColumn(name = "classroom_id")
+    @JoinColumn(name = "id_classroom")
     private Classroom classroom;
 
     public void addGroup(Group group) {

@@ -22,13 +22,13 @@ public class Subject {
     private String name;
     private String description;
     @OneToOne
-    @JoinColumn(name = "supervisor_id")
+    @JoinColumn(name = "id_supervisor")
     private Teacher supervisor;
     @ManyToMany
     @JoinTable(
             name = "subject_teacher",
-            joinColumns = {@JoinColumn(name = "subject_id")},
-            inverseJoinColumns = {@JoinColumn(name = "teacher_id")}
+            joinColumns = {@JoinColumn(name = "id_subject")},
+            inverseJoinColumns = {@JoinColumn(name = "id_teacher")}
     )
     private List<Teacher> teachers;
 

@@ -25,7 +25,7 @@ public class Student {
     private String firstname;
     private String lastname;
     @ManyToOne
-    @JoinColumn(name = "gender_id")
+    @JoinColumn(name = "id_gender")
     private Gender gender;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;

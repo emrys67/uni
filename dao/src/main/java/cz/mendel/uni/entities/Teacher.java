@@ -22,15 +22,15 @@ public class Teacher {
     @Column(name = "id_teacher")
     private long id;
     @OneToOne
-    @JoinColumn(name = "vacation_id")
+    @JoinColumn(name = "id_vacation")
     private Vacation vacation;
     @OneToOne
-    @JoinColumn(name = "working_hours_id")
+    @JoinColumn(name = "id_working_hours")
     private TimePeriod workingHours;
     private String firstname;
     private String lastname;
     @ManyToOne
-    @JoinColumn(name = "gender_id")
+    @JoinColumn(name = "id_gender")
     private Gender gender;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;

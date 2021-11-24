@@ -19,7 +19,7 @@ public class Vacation {
     @Column(name = "id_vacation")
     private long id;
     @OneToOne
-    @JoinColumn(name = "time_period_id")
+    @JoinColumn(name = "id_timeperiod")
     private TimePeriod timePeriod;
     private String description;
 }

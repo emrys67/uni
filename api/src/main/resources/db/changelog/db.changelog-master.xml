@@ -23,7 +23,7 @@
             <column name="description" type="varchar(500)">
                 <constraints nullable="true"/>
             </column>
-            <column name="time_period_id" type="bigint">
+            <column name="id_timeperiod" type="bigint">
                 <constraints primaryKey="true" foreignKeyName="time_period_id_fk"
                              references="timeperiod(id_timeperiod)"/>
             </column>
@@ -50,15 +50,15 @@
             <column name="date_of_birth" type="date">
                 <constraints nullable="false"/>
             </column>
-            <column name="gender_id" type="bigint">
+            <column name="id_gender" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="gender_id_fk"
                              references="gender(id_gender)"/>
             </column>
-            <column name="working_hours_id" type="bigint">
+            <column name="id_working_hours" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="working_hours_id_fk"
                              references="timeperiod(id_timeperiod)"/>
             </column>
-            <column name="vacation_id" type="bigint">
+            <column name="id_vacation" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="vacation_id_fk"
                              references="vacation(id_vacation)"/>
             </column>
@@ -86,11 +86,11 @@
             <column name="date_of_birth" type="date">
                 <constraints nullable="false"/>
             </column>
-            <column name="gender_id" type="bigint">
+            <column name="id_gender" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="gender_id_fk"
                              references="gender(id_gender)"/>
             </column>
-            <column name="group_id" type="bigint">
+            <column name="id_group" type="bigint">
                 <constraints foreignKeyName="group_id_fk" references="group(id_group)"/>
             </column>
             <column name="study_year" type="int">
@@ -117,7 +117,7 @@
             <column name="description" type="varchar(500)">
                 <constraints nullable="false"/>
             </column>
-            <column name="supervisor_id" type="bigint">
+            <column name="id_supervisor" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="supervisor_id_fk"
                              references="teacher(id_teacher)"/>
             </column>
@@ -127,52 +127,52 @@
             <column name="id_lecture" type="bigserial">
                 <constraints unique="true" primaryKey="true"/>
             </column>
-            <column name="teacher_id" type="bigint">
+            <column name="id_teacher" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="teacher_id_fk"
                              references="teacher(id_teacher)"/>
             </column>
-            <column name="subject_id" type="bigint">
+            <column name="id_subject" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="subject_id_fk"
                              references="subject(id_subject)"/>
             </column>
-            <column name="time_period_id" type="bigint">
+            <column name="id_timeperiod" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="time_period_id_fk"
                              references="timeperiod(id_timeperiod)"/>
             </column>
-            <column name="classroom_id" type="bigint">
+            <column name="id_classroom" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="classroom_id_fk"
                              references="classroom(id_classroom)"/>
             </column>
         </createTable>
 
         <createTable tableName="subject_teacher">
-            <column name="subject_id" type="bigint">
+            <column name="id_subject" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="subject_id_fk"
                              references="subject(id_subject)"/>
             </column>
-            <column name="teacher_id" type="bigint">
+            <column name="id_teacher" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="teacher_id_fk"
                              references="teacher(id_teacher)"/>
             </column>
         </createTable>
 
         <createTable tableName="lecture_group">
-            <column name="lecture_id" type="bigint">
+            <column name="id_lecture" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="lecture_id_fk"
                              references="lecture(id_lecture)"/>
             </column>
-            <column name="group_id" type="bigint">
+            <column name="id_group" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="group_id_fk"
                              references="group(id_group)"/>
             </column>
         </createTable>
 
         <createTable tableName="group_student">
-            <column name="group_id" type="bigint">
+            <column name="id_group" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="group_id_fk"
                              references="group(id_group)"/>
             </column>
-            <column name="student_id" type="bigint">
+            <column name="id_student" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="student_id_fk"
                              references="student(id_student)"/>
             </column>
