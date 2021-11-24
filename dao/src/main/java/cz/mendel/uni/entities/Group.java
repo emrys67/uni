@@ -23,8 +23,8 @@ public class Group {
     @ManyToMany
     @JoinTable(
             name = "group_student",
-            joinColumns = {@JoinColumn(name = "group_id")},
-            inverseJoinColumns = {@JoinColumn(name = "student_id")}
+            joinColumns = {@JoinColumn(name = "id_group")},
+            inverseJoinColumns = {@JoinColumn(name = "id_student")}
     )
     private List<Student> students;
     @ManyToMany(mappedBy = "groups")
