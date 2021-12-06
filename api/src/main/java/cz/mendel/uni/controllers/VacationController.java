@@ -33,7 +33,6 @@ public class VacationController {
     @ApiOperation(value = "Create new vacation")
     @PostMapping("/add")
     public String add(Vacation vacation) {
-//        TimePeriod timePeriod = timePeriodService.save(vacation.getTimePeriod());
         vacation.setTimePeriod(timePeriodService.save(vacation.getTimePeriod()));
         vacationService.save(vacation);
         return "redirect:/vacation/add/new";
@@ -41,7 +40,7 @@ public class VacationController {
 
     @ApiOperation(value = "Edit vacation by id")
     @GetMapping("/edit/{id}")
-    public String editVacatopn(@PathVariable("id") long id, Model model) {
+    public String editVacation(@PathVariable("id") long id, Model model) {
         model.addAttribute("vacation", vacationService.findById(id));
         return "vacations/edit-vacation";
     }

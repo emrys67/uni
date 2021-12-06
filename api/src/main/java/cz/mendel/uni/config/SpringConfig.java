@@ -4,102 +4,79 @@ import cz.mendel.uni.controllers.*;
 import cz.mendel.uni.controllers.exceptions.ExceptionHandlerController;
 import cz.mendel.uni.repositories.*;
 import cz.mendel.uni.services.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SpringConfig {
-    @Autowired
-    private ApplicationContext context;
-    @Autowired
-    private ClassroomRepository classroomRepository;
-    @Autowired
-    private GenderRepository genderRepository;
-    @Autowired
-    private GroupRepository groupRepository;
-    @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
-    private SubjectRepository subjectRepository;
-    @Autowired
-    private TeacherRepository teacherRepository;
-    @Autowired
-    private TimePeriodRepository timePeriodRepository;
-    @Autowired
-    private VacationRepository vacationRepository;
-    @Autowired
-    private LectureRepository lectureRepository;
-
     @Bean
-    public ClassroomService classroomService() {
+    public ClassroomService classroomService(ClassroomRepository classroomRepository) {
         return new ClassroomService(classroomRepository);
     }
 
     @Bean
-    public GenderService genderService() {
+    public GenderService genderService(GenderRepository genderRepository) {
         return new GenderService(genderRepository);
     }
 
     @Bean
-    public GroupService groupService() {
+    public GroupService groupService(GroupRepository groupRepository) {
         return new GroupService(groupRepository);
     }
 
     @Bean
-    public StudentService studentService() {
+    public StudentService studentService(StudentRepository studentRepository) {
         return new StudentService(studentRepository);
     }
 
     @Bean
-    public SubjectService subjectService() {
+    public SubjectService subjectService(SubjectRepository subjectRepository) {
         return new SubjectService(subjectRepository);
     }
 
     @Bean
-    public TeacherService teacherService() {
+    public TeacherService teacherService(TeacherRepository teacherRepository) {
         return new TeacherService(teacherRepository);
     }
 
     @Bean
-    public TimePeriodService timePeriodService() {
+    public TimePeriodService timePeriodService(TimePeriodRepository timePeriodRepository) {
         return new TimePeriodService(timePeriodRepository);
     }
 
     @Bean
-    public VacationService vacationService() {
+    public VacationService vacationService(VacationRepository vacationRepository) {
         return new VacationService(vacationRepository);
     }
 
     @Bean
-    public LectureService lectureService(){
+    public LectureService lectureService(LectureRepository lectureRepository) {
         return new LectureService(lectureRepository);
     }
 
     @Bean
-    public ClassroomController classroomController() {
-        return new ClassroomController(context.getBean(ClassroomService.class));
+    public ClassroomController classroomController(ClassroomService classroomService) {
+        return new ClassroomController(classroomService);
     }
 
     @Bean
-    public TimeperiodController timeperiodController() {
-        return new TimeperiodController(context.getBean(TimePeriodService.class));
+    public TimeperiodController timeperiodController(TimePeriodService timePeriodService) {
+        return new TimeperiodController(timePeriodService);
     }
 
     @Bean
-    public VacationController vacationController() {
-        return new VacationController(context.getBean(VacationService.class), context.getBean(TimePeriodService.class));
+    public VacationController vacationController(VacationService vacationService, TimePeriodService timePeriodService) {
+        return new VacationController(vacationService, timePeriodService);
     }
 
     @Bean
-    public GenderController genderController() {
-        return new GenderController(context.getBean(GenderService.class));
+    public GenderController genderController(GenderService genderService) {
+        return new GenderController(genderService);
     }
 
     @Bean
-    public GroupController groupController() {
-        return new GroupController(context.getBean(GroupService.class), context.getBean(StudentService.class));
+    public GroupController groupController(GroupService groupService, StudentService studentService) {
+        return new GroupController(groupService, studentService);
     }
 
     @Bean
@@ -108,23 +85,23 @@ public class SpringConfig {
     }
 
     @Bean
-    public StudentController studentController() {
-        return new StudentController(context.getBean(StudentService.class));
+    public StudentController studentController(StudentService studentService) {
+        return new StudentController(studentService);
     }
 
     @Bean
-    public TeacherController teacherController() {
-        return new TeacherController(context.getBean(TimePeriodService.class), context.getBean(VacationService.class),
-                context.getBean(TeacherService.class));
+    public TeacherController teacherController(TimePeriodService timePeriodService, VacationService vacationService, TeacherService teacherService) {
+        return new TeacherController(timePeriodService, vacationService,
+                teacherService);
     }
 
     @Bean
-    public SubjectController subjectController() {
-        return new SubjectController(context.getBean(SubjectService.class), context.getBean(TeacherService.class));
+    public SubjectController subjectController(SubjectService subjectService, TeacherService teacherService) {
+        return new SubjectController(subjectService, teacherService);
     }
 
     @Bean
-    public ExceptionHandlerController exceptionHandlerController(){
+    public ExceptionHandlerController exceptionHandlerController() {
         return new ExceptionHandlerController();
     }
 }

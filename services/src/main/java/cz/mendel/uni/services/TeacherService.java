@@ -18,8 +18,7 @@ public class TeacherService {
         return teacherRepository.findById(id).orElse(null);
     }
 
-    @NonNull
-    public Teacher save(Teacher teacher) {
+    public Teacher save(@NonNull Teacher teacher) {
         log.debug("Start service for saving teacher");
         return teacherRepository.save(teacher);
     }
@@ -34,8 +33,7 @@ public class TeacherService {
         teacherRepository.deleteById(id);
     }
 
-    @NonNull
-    public void update(Teacher teacher) {
+    public void update(@NonNull Teacher teacher) {
         log.debug("Start service for updating teacher");
         teacherRepository.save(teacher);
     }

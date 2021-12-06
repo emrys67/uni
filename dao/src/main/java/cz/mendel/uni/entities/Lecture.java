@@ -1,9 +1,6 @@
-package cz.mendel.uni.entities;//package cz.mendel.uni.dao.entities;
+package cz.mendel.uni.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -38,14 +35,4 @@ public class Lecture {
     @ManyToOne
     @JoinColumn(name = "id_classroom")
     private Classroom classroom;
-
-    public void addGroup(Group group) {
-        groups.add(group);
-        group.getLectures().add(this);
-    }
-
-    public void deleteGroup(Group group) {
-        groups.remove(group);
-        group.getLectures().remove(this);
-    }
 }

@@ -18,14 +18,12 @@ public class ClassroomService {
         return classroomRepository.findById(id).orElse(null);
     }
 
-    @NonNull
-    public Classroom save(Classroom classroom) {
+    public Classroom save(@NonNull Classroom classroom) {
         log.debug("Start service for saving classroom");
         return classroomRepository.save(classroom);
     }
 
-    @NonNull
-    public void update(Classroom classroom) {
+    public void update(@NonNull Classroom classroom) {
         log.debug("Start service for updating classroom");
         classroomRepository.save(classroom);
     }

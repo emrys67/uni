@@ -19,8 +19,7 @@ public class LectureService {
         return lectureRepository.findById(id).orElse(null);
     }
 
-    @NonNull
-    public Lecture save(Lecture lecture) {
+    public Lecture save(@NonNull Lecture lecture) {
         log.debug("Start service for saving lecture");
         return lectureRepository.save(lecture);
     }
@@ -35,21 +34,18 @@ public class LectureService {
         lectureRepository.deleteById(id);
     }
 
-    @NonNull
-    public void update(Lecture lecture) {
+    public void update(@NonNull Lecture lecture) {
         log.debug("Start service for updating lecture");
         lectureRepository.save(lecture);
     }
 
-    @NonNull
-    public void addGroup(Lecture lecture, Group group) {
+    public void addGroup(@NonNull Lecture lecture, Group group) {
         log.debug("Start service for adding group to the lecture");
-        lecture.addGroup(group);
+        lecture.getGroups().add(group);
     }
 
-    @NonNull
-    public void deleteGroup(Lecture lecture, Group group) {
+    public void deleteGroup(@NonNull Lecture lecture, Group group) {
         log.debug("Start service for deleting group from the lecture");
-        lecture.deleteGroup(group);
+        lecture.getGroups().remove(group);
     }
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -18,5 +19,6 @@ public class Gender {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_gender")
     private long id;
+    @NotBlank(message = "Name may not be empty")
     private String name;
 }

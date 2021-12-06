@@ -18,8 +18,7 @@ public class TimePeriodService {
         return timePeriodRepository.findById(id).orElse(null);
     }
 
-    @NonNull
-    public TimePeriod save(TimePeriod timePeriod) {
+    public TimePeriod save(@NonNull TimePeriod timePeriod) {
         log.debug("Start service for saving timeperiod");
         return timePeriodRepository.save(timePeriod);
     }
@@ -34,8 +33,7 @@ public class TimePeriodService {
         timePeriodRepository.deleteById(id);
     }
 
-    @NonNull
-    public void update(TimePeriod timePeriod) {
+    public void update(@NonNull TimePeriod timePeriod) {
         log.debug("Start service for updating timeperiod");
         timePeriodRepository.save(timePeriod);
     }

@@ -18,8 +18,7 @@ public class VacationService {
         return vacationRepository.findById(id).orElse(null);
     }
 
-    @NonNull
-    public Vacation save(Vacation vacation) {
+    public Vacation save(@NonNull Vacation vacation) {
         log.debug("Start service for saving vacation");
         return vacationRepository.save(vacation);
     }
@@ -34,8 +33,7 @@ public class VacationService {
         vacationRepository.deleteById(id);
     }
 
-    @NonNull
-    public void update(Vacation vacation) {
+    public void update(@NonNull Vacation vacation) {
         log.debug("Start service for updating vacation");
         vacationRepository.save(vacation);
     }
