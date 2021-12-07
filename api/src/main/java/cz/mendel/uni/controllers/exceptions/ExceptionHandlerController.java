@@ -14,7 +14,6 @@ public class ExceptionHandlerController {
     public ModelAndView handleGenericExceptions(Exception exception) {
         log.debug("Start handling generic exception - \"{}\"", exception.getMessage());
         log.warn(exception.getMessage(), exception);
-        ModelAndView modelAndView = new ModelAndView(ERROR_VIEW);
-        return modelAndView.addObject("exception", exception.getClass().getSimpleName());
+        return new ModelAndView(ERROR_VIEW).addObject("exception", exception.getClass().getSimpleName());
     }
 }
