@@ -18,8 +18,7 @@ public class StudentService {
         return studentRepository.findById(id).orElse(null);
     }
 
-    @NonNull
-    public Student save(Student student) {
+    public Student save(@NonNull Student student) {
         log.debug("Start service for saving student");
         return studentRepository.save(student);
     }
@@ -34,8 +33,7 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    @NonNull
-    public void update(Student student) {
+    public void update(@NonNull Student student) {
         log.debug("Start service for updating student");
         studentRepository.save(student);
     }

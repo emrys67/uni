@@ -19,8 +19,7 @@ public class GroupService {
         return groupRepository.findById(id).orElse(null);
     }
 
-    @NonNull
-    public Group save(Group group) {
+    public Group save(@NonNull Group group) {
         log.debug("Start service for saving group");
         return groupRepository.save(group);
     }
@@ -35,26 +34,22 @@ public class GroupService {
         groupRepository.deleteById(id);
     }
 
-    @NonNull
-    public void update(Group group) {
+    public void update(@NonNull Group group) {
         log.debug("Start service for updating group");
         groupRepository.save(group);
     }
 
-    @NonNull
-    public List<Student> findStudents(Group group) {
+    public List<Student> findStudents(@NonNull Group group) {
         log.debug("Start service for getting all students from the group");
         return group.getStudents();
     }
 
-    @NonNull
-    public void addStudent(Student student, Group group) {
+    public void addStudent(@NonNull Student student, @NonNull Group group) {
         log.debug("Start service for adding student to the group");
         group.getStudents().add(student);
     }
 
-    @NonNull
-    public void deleteStudent(Student student, Group group) {
+    public void deleteStudent(@NonNull Student student, @NonNull Group group) {
         log.debug("Start service for deleting student from the group");
         group.getStudents().remove(student);
     }

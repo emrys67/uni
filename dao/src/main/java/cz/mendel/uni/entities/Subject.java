@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,7 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_subject")
     private long id;
+    @NotBlank(message = "Name may not be empty")
     private String name;
     private String description;
     @OneToOne
@@ -31,14 +33,4 @@ public class Subject {
             inverseJoinColumns = {@JoinColumn(name = "id_teacher")}
     )
     private List<Teacher> teachers;
-
-    public void addTeacher(Teacher teacher) {
-        teachers.add(teacher);
-        teacher.getSubjects().add(this);
-    }
-
-    public void deleteTeacher(Teacher teacher) {
-        teachers.remove(teacher);
-        teacher.getSubjects().remove(this);
-    }
 }

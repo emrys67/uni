@@ -18,8 +18,7 @@ public class GenderService {
         return genderRepository.findById(id).orElse(null);
     }
 
-    @NonNull
-    public Gender save(Gender gender) {
+    public Gender save(@NonNull Gender gender) {
         log.debug("Start service for saving gender");
         return genderRepository.save(gender);
     }
@@ -34,8 +33,7 @@ public class GenderService {
         genderRepository.deleteById(id);
     }
 
-    @NonNull
-    public void update(Gender gender) {
+    public void update(@NonNull Gender gender) {
         log.debug("Start service for updating gender");
         genderRepository.save(gender);
     }

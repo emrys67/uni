@@ -8,18 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @ControllerAdvice("cz.mendel.uni.controllers")
 public class ExceptionHandlerController {
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handleGenericExceptions(Exception ex){
-        log.debug("Start handling generic exception - \"{}\"", ex.getMessage());
-        log.warn(ex.getMessage(), ex);
-        return prepareView( ex, "errors/error");
-    }
+    private static final String ERROR_VIEW = "errors/error";
 
-    private ModelAndView prepareView(Exception exception, String view){
-        log.debug("Start preparing view");
-        ModelAndView modelAndView = new ModelAndView(view);
-        modelAndView.addObject("exception", exception.getClass().getSimpleName());
-        log.debug("Start using view with name \"{}\"", exception.getClass().getSimpleName());
-        return modelAndView;
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleGenericExceptions(Exception exception) {
+        log.debug("Start handling generic exception - \"{}\"", exception.getMessage());
+        log.warn(exception.getMessage(), exception);
+        return new ModelAndView(ERROR_VIEW).addObject("exception", exception.getClass().getSimpleName());
     }
 }

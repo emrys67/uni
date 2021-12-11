@@ -19,8 +19,7 @@ public class SubjectService {
         return subjectRepository.findById(id).orElse(null);
     }
 
-    @NonNull
-    public Subject save(Subject subject) {
+    public Subject save(@NonNull Subject subject) {
         log.debug("Start service for saving subject");
         return subjectRepository.save(subject);
     }
@@ -35,21 +34,18 @@ public class SubjectService {
         subjectRepository.deleteById(id);
     }
 
-    @NonNull
-    public void update(Subject subject) {
+    public void update(@NonNull Subject subject) {
         log.debug("Start service for updating subject");
         subjectRepository.save(subject);
     }
 
-    @NonNull
-    public void addTeacher(Subject subject, Teacher teacher) {
+    public void addTeacher(@NonNull Subject subject, @NonNull Teacher teacher) {
         log.debug("Start service for adding teacher to the subject");
-        subject.addTeacher(teacher);
+        subject.getTeachers().add(teacher);
     }
 
-    @NonNull
-    public void deleteTeacher(Subject subject, Teacher teacher) {
+    public void deleteTeacher(@NonNull Subject subject, @NonNull Teacher teacher) {
         log.debug("Start service for deleting teacher from the subject ");
-        subject.deleteTeacher(teacher);
+        subject.getTeachers().remove(teacher);
     }
 }
