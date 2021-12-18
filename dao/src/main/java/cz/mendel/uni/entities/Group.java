@@ -14,18 +14,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "group", schema = "public")
+@Table(name = "group_of_students", schema = "public")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_group")
+    @Column(name = "id_group_of_students")
     private long id;
     @NotBlank(message = "Name may not be empty")
     private String name;
     @ManyToMany
     @JoinTable(
-            name = "group_student",
-            joinColumns = {@JoinColumn(name = "id_group")},
+            name = "group_of_students_student",
+            joinColumns = {@JoinColumn(name = "id_group_of_students")},
             inverseJoinColumns = {@JoinColumn(name = "id_student")}
     )
     private List<Student> students;

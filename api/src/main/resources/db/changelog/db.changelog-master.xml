@@ -5,6 +5,7 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="test" author="xtrofymo">
+
         <createTable tableName="timeperiod">
             <column name="id_timeperiod" type="bigserial">
                 <constraints unique="true" primaryKey="true"/>
@@ -64,8 +65,8 @@
             </column>
         </createTable>
 
-        <createTable tableName="group">
-            <column name="id_group" type="bigserial">
+        <createTable tableName="group_of_students">
+            <column name="id_group_of_students" type="bigserial">
                 <constraints unique="true" primaryKey="true"/>
             </column>
             <column name="name" type="varchar(200)">
@@ -87,11 +88,11 @@
                 <constraints nullable="false"/>
             </column>
             <column name="id_gender" type="bigint">
-                <constraints primaryKey="true" nullable="false" foreignKeyName="gender_id_fk"
+                <constraints primaryKey="true" nullable="false" foreignKeyName="gender_student_id_fk"
                              references="gender(id_gender)"/>
             </column>
-            <column name="id_group" type="bigint">
-                <constraints foreignKeyName="group_id_fk" references="group(id_group)"/>
+            <column name="id_group_of_students" type="bigint">
+                <constraints foreignKeyName="group_of_students_student_id_fk" references="group_of_students(id_group_of_students)"/>
             </column>
             <column name="study_year" type="int">
                 <constraints nullable="false"/>
@@ -136,7 +137,7 @@
                              references="subject(id_subject)"/>
             </column>
             <column name="id_timeperiod" type="bigint">
-                <constraints primaryKey="true" nullable="false" foreignKeyName="time_period_id_fk"
+                <constraints primaryKey="true" nullable="false" foreignKeyName="time_period_lecture_id_fk"
                              references="timeperiod(id_timeperiod)"/>
             </column>
             <column name="id_classroom" type="bigint">
@@ -147,30 +148,30 @@
 
         <createTable tableName="subject_teacher">
             <column name="id_subject" type="bigint">
-                <constraints primaryKey="true" nullable="false" foreignKeyName="subject_id_fk"
+                <constraints primaryKey="true" nullable="false" foreignKeyName="subject_teacher_id_fk"
                              references="subject(id_subject)"/>
             </column>
             <column name="id_teacher" type="bigint">
-                <constraints primaryKey="true" nullable="false" foreignKeyName="teacher_id_fk"
+                <constraints primaryKey="true" nullable="false" foreignKeyName="teacher_subject_id_fk"
                              references="teacher(id_teacher)"/>
             </column>
         </createTable>
 
-        <createTable tableName="lecture_group">
+        <createTable tableName="lecture_group_of_students">
             <column name="id_lecture" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="lecture_id_fk"
                              references="lecture(id_lecture)"/>
             </column>
-            <column name="id_group" type="bigint">
-                <constraints primaryKey="true" nullable="false" foreignKeyName="group_id_fk"
-                             references="group(id_group)"/>
+            <column name="id_group_of_students" type="bigint">
+                <constraints primaryKey="true" nullable="false" foreignKeyName="group_of_students_lecture_id_fk"
+                             references="group_of_students(id_group_of_students)"/>
             </column>
         </createTable>
 
-        <createTable tableName="group_student">
-            <column name="id_group" type="bigint">
-                <constraints primaryKey="true" nullable="false" foreignKeyName="group_id_fk"
-                             references="group(id_group)"/>
+        <createTable tableName="group_of_students_student">
+            <column name="id_group_of_students" type="bigint">
+                <constraints primaryKey="true" nullable="false" foreignKeyName="group_of_students_students_id_fk"
+                             references="group_of_students(id_group_of_students)"/>
             </column>
             <column name="id_student" type="bigint">
                 <constraints primaryKey="true" nullable="false" foreignKeyName="student_id_fk"
