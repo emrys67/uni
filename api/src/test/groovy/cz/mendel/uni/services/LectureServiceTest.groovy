@@ -1,5 +1,6 @@
 package cz.mendel.uni.services
 
+import cz.mendel.uni.entities.Group
 import cz.mendel.uni.entities.Lecture
 import cz.mendel.uni.repositories.LectureRepository
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -56,5 +57,28 @@ class LectureServiceTest extends Specification {
         lectureService.deleteById(1)
         then:
         1 * lectureRepository.deleteById(1)
+    }
+
+    def "Group is added to Lecture.groups when addGroup(Lecture, Group) is used"() {
+        given:
+        ArrayList<Group> arrayList = new ArrayList<Group>()
+        Lecture lectureStub = Stub()
+        lectureStub.getGroups() >> arrayList
+        when:
+        lectureService.addGroup(lectureStub, new Group())
+        then:
+        arrayList.get(0) == new Group()
+    }
+
+    def "Group is removed from Lecture.groups when deleteGroup(Lecture, Group) is used"() {
+        given:
+        ArrayList<Group> arrayList = new ArrayList<Group>()
+        arrayList.add(new Group())
+        Lecture lectureStub = Stub()
+        lectureStub.getGroups() >> arrayList
+        when:
+        lectureService.deleteGroup(lectureStub, new Group())
+        then:
+        arrayList.isEmpty()
     }
 }

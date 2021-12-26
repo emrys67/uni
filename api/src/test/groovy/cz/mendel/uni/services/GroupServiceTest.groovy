@@ -1,6 +1,7 @@
 package cz.mendel.uni.services
 
 import cz.mendel.uni.entities.Group
+import cz.mendel.uni.entities.Student
 import cz.mendel.uni.repositories.GroupRepository
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
@@ -56,5 +57,37 @@ class GroupServiceTest extends Specification {
         groupService.deleteById(1)
         then:
         1 * groupRepository.deleteById(1)
+    }
+
+    def "Group.getStudents() is used in findStudents(Group) "() {
+        given:
+        Group groupMock = Mock()
+        when:
+        groupService.findStudents(groupMock)
+        then:
+        1 * groupMock.getStudents()
+    }
+
+    def "Student is added to Group.students when addStudent(Student, Group) is used"() {
+        given:
+        ArrayList<Student> arrayList = new ArrayList<Student>()
+        Group groupMock = Stub()
+        groupMock.getStudents() >> arrayList
+        when:
+        groupService.addStudent(new Student(), groupMock)
+        then:
+        arrayList.get(0) == new Student()
+    }
+
+    def "Student is removed from Group.students when deleteStudent(Student, Group) is used"() {
+        given:
+        ArrayList<Student> arrayList = new ArrayList<Student>()
+        arrayList.add(new Student())
+        Group groupMock = Stub()
+        groupMock.getStudents() >> arrayList
+        when:
+        groupService.deleteStudent(new Student(), groupMock)
+        then:
+        arrayList.isEmpty()
     }
 }

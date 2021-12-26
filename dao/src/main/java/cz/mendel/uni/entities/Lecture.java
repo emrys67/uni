@@ -21,9 +21,9 @@ public class Lecture {
     private Subject subject;
     @ManyToMany
     @JoinTable(
-            name = "lecture_group",
+            name = "lecture_group_of_students",
             joinColumns = {@JoinColumn(name = "id_lecture")},
-            inverseJoinColumns = {@JoinColumn(name = "id_group")}
+            inverseJoinColumns = {@JoinColumn(name = "id_group_of_students")}
     )
     private List<Group> groups;
     @ManyToOne

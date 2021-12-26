@@ -31,3 +31,15 @@ To stop
 ```` 
 mvn spring-boot:stop
 ````
+##Run tests
+
+````
+mvn clean test
+````
+
+Receive coverage report
+
+````
+mvn jacoco:report-aggregate
+````
+
